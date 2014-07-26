@@ -18,6 +18,8 @@ using NetOffice.VBIDEApi.Enums;
 using NetOffice.Tools;
 using NetOffice.ExcelApi.Tools;
 
+using Alissa.GUI;
+
 namespace CellDiff
 {
     [COMAddin("CellDiff","Detect differences of texts in worksheet cells",3)]
@@ -99,10 +101,12 @@ namespace CellDiff
                         break;
                 }
             }
-            catch (Exception throwedException)
+            catch (Exception e)
             {
-                string details = string.Format("{1}{1}Details:{1}{1}{0}", throwedException.Message, Environment.NewLine);
-                MessageBox.Show("An error occured in OnAction: " + details, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                using (var dlg = new ExceptionDialog())
+                {
+                    dlg.Exception = e;
+                }
             }
         }
 
