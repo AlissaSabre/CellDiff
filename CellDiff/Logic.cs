@@ -22,8 +22,8 @@ namespace CellDiff
             switch (selection.Areas.Count)
             {
                 case 1:
-                    var area = selection.Areas[0];
-                    var address = area.Address(true, true);
+                    var area = selection.Areas[1]; // index is base 1
+                    var address = area.Address(false, false);
                     MessageBox.Show(address);
                     break;
                 case 2:

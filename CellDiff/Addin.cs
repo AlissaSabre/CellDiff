@@ -106,6 +106,7 @@ namespace CellDiff
                 using (var dlg = new ExceptionDialog())
                 {
                     dlg.Exception = e;
+                    dlg.ShowDialog();
                 }
             }
         }
