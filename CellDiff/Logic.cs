@@ -21,13 +21,17 @@ namespace CellDiff
             }
             switch (selection.Areas.Count)
             {
+                case 1:
+                    var area = selection.Areas[0];
+                    var address = area.Address(true, true);
+                    MessageBox.Show(address);
+                    break;
+                case 2:
+                    break;
                 default:
                     MessageBox.Show("Please select either two contiguous ranges of cells or a contiguous range of cells.");
                     break;
-                case 2:
-                    
             }
-            if (selection.Areas.Count == 2)
         }
     }
 }
