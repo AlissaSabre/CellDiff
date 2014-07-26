@@ -20,23 +20,23 @@ namespace CellDiff
                 return;
             }
 
-            Range range1, range2;
+            Range[] range1, range2;
             switch (selection.Areas.Count)
             {
                 case 1:
                     var area = selection.Areas[1];
-                    var loc = area.GetLocation();
-                    if (loc[2] == 2)
+                    var dim = area.Dimension();
+                    if (dim[0] == 2)
                     {
                         // Go vertical
-                        range1 = area.Columns[1];
-                        range2 = area.Columns[2];
+                        range1 = area.Columns[1].ToArray();
+                        range2 = area.Columns[2].ToArray();
                     }
-                    else if (loc[3] == 2)
+                    else if (dim[1] == 2)
                     {
                         // GO horizontal
-                        range1 = area.Rows[1];
-                        range2 = area.Rows[2];
+                        range1 = area.Rows[1].ToArray();
+                        range2 = area.Rows[2].ToArray();
                     }
                     else
                     {
@@ -48,33 +48,29 @@ namespace CellDiff
                 case 2:
                     var area1 = selection.Areas[1];
                     var area2 = selection.Areas[2];
-                    var loc1 = area1.GetLocation();
-                    var loc2 = area2.GetLocation();
-                    if ((loc1[2] != 1 && loc1[3] != 1) || (loc2[2] != 1 && loc2[3] != 1))
+                    var dim1 = area1.Dimension();
+                    var dim2 = area2.Dimension();
+                    if (dim1[0] == 1 && dim2[0] == 1 && dim1[1] == dim2[1] ||
+                        dim1[0] == 1 && dim2[1] == 1 && dim1[1] == dim2[0] ||
+                        dim1[1] == 1 && dim2[0] == 1 && dim1[0] == dim2[1] ||
+                        dim1[1] == 1 && dim2[1] == 1 && dim1[0] == dim2[0])
+                    {
+                        range1 = area1.ToArray();
+                        range2 = area2.ToArray();
+                    }
+                    else
                     {
                         Error("WRONG SELECTION");
                         return;
                     }
-                    else if (loc1[2] == 1 && loc2[2] == 1 && loc1[3] == loc2[3]
-                        ||   loc1[2] == 1 && loc2[3] == 1 && loc1[3] == loc2[2]
-                        ||   loc1[3] == 1 && loc2[2] == 1 && loc1[2] == loc2[3]
-                        ||   loc1[3] == 1 && loc2[3] == 1 && loc1[2] == loc2[2])
-                    {
-                        range1 = area1;
-                        range2 = area2;
-                    }
-                    else
-                    {
-                        Error("When selecting two separate ranges, they must have a same length.");
-                        return;
-                    }
                     break;
                 default:
-                    MessageBox.Show("WRONG SELECTION");
+                    Error("WRONG SELECTION");
                     return;
             }
 
-            MessageBox.Show("Range1 = " + range1.Address + ", Range2 = " + range2.Address);
+            MessageBox.Show("Range1 = " + string.Join(",", range1.Select(r => r.Address(false, false)))
+                        + ", Range2 = " + string.Join(",", range2.Select(r => r.Address(false, false))));
         }
 
         public static void Error(string s)
