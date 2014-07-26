@@ -9,6 +9,10 @@ using NetOffice.ExcelApi;
 
 namespace CellDiff
 {
+    public class CompareOptions
+    {
+    }
+
     public static class Logic
     {
         public static void QuickCompare(NetOffice.ExcelApi.Application excel)
@@ -20,23 +24,19 @@ namespace CellDiff
                 return;
             }
 
-            Range[] range1, range2;
             switch (selection.Areas.Count)
             {
                 case 1:
                     var area = selection.Areas[1];
-                    var dim = area.Dimension();
-                    if (dim[0] == 2)
+                    if (area.Columns.Count == 2)
                     {
                         // Go vertical
-                        range1 = area.Columns[1].ToArray();
-                        range2 = area.Columns[2].ToArray();
+                        CompareCells(area.Columns[1], area.Columns[2], null, null);
                     }
-                    else if (dim[1] == 2)
+                    else if (area.Rows.Count == 2)
                     {
                         // GO horizontal
-                        range1 = area.Rows[1].ToArray();
-                        range2 = area.Rows[2].ToArray();
+                        CompareCells(area.Rows[1], area.Rows[2], null, null);
                     }
                     else
                     {
@@ -48,15 +48,14 @@ namespace CellDiff
                 case 2:
                     var area1 = selection.Areas[1];
                     var area2 = selection.Areas[2];
-                    var dim1 = area1.Dimension();
-                    var dim2 = area2.Dimension();
-                    if (dim1[0] == 1 && dim2[0] == 1 && dim1[1] == dim2[1] ||
-                        dim1[0] == 1 && dim2[1] == 1 && dim1[1] == dim2[0] ||
-                        dim1[1] == 1 && dim2[0] == 1 && dim1[0] == dim2[1] ||
-                        dim1[1] == 1 && dim2[1] == 1 && dim1[0] == dim2[0])
+                    int a1c = area1.Columns.Count, a1r = area1.Rows.Count;
+                    int a2c = area2.Columns.Count, a2r = area2.Rows.Count;
+                    if (a1c == 1 && a2c == 1 && a1r == a2r ||
+                        a1c == 1 && a2r == 1 && a1r == a2c ||
+                        a1r == 1 && a2c == 1 && a1c == a2r ||
+                        a1r == 1 && a2r == 1 && a1c == a2c)
                     {
-                        range1 = area1.ToArray();
-                        range2 = area2.ToArray();
+                        CompareCells(area1, area2, null, null);
                     }
                     else
                     {
@@ -64,13 +63,21 @@ namespace CellDiff
                         return;
                     }
                     break;
+
                 default:
                     Error("WRONG SELECTION");
                     return;
             }
+        }
 
-            MessageBox.Show("Range1 = " + string.Join(",", range1.Select(r => r.Address(false, false)))
-                        + ", Range2 = " + string.Join(",", range2.Select(r => r.Address(false, false))));
+        public static void CompareCells(Range sources, Range targets, Range destinations, CompareOptions options)
+        {
+            var src = sources.Cells.ToArray();
+            var tgt = targets.Cells.ToArray();
+            var dst = destinations == null ? null : destinations.Cells.ToArray();
+
+            MessageBox.Show("src = " + string.Join(",", src.Select(r => r.Address(false, false)))
+                        + ", dst = " + string.Join(",", dst.Select(r => r.Address(false, false))));
         }
 
         public static void Error(string s)
