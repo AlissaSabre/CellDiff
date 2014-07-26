@@ -100,7 +100,7 @@ namespace CellDiff
             {
                 src.Value2 = src_text;
                 tgt.Value2 = tgt_text;
-                int i = 0, j = 0;
+                int i = 1, j = 1;
                 foreach (var c in diff)
                 {
                     switch (c)
