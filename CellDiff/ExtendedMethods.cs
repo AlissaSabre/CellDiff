@@ -40,10 +40,20 @@ namespace CellDiff
         /// </remarks>
         public static int[] GetLocation(this Range range)
         {
-            var a = range.Address(false, false, XlReferenceStyle.xlR1C1)
-                .Split(R1C1_DELIMITERS, 4, StringSplitOptions.RemoveEmptyEntries)
-                .Select(s => Int32.Parse(s)).ToArray();
-            return new[] { a[1], a[0], a[3] - a[1] + 1, a[2] - a[0] + 1 };
+            var a = range.Address(true, true, XlReferenceStyle.xlR1C1)
+                .Split(R1C1_DELIMITERS, 6)
+                .Select(s => (s == "") ? 0 : Int32.Parse(s))
+                .ToArray();
+            if (a.Length < 4)
+            {
+                // "R1C2"
+                return new[] { a[2], a[1], 1, 1 };
+            }
+            else
+            {
+                // "R1C2:R4C5
+                return new[] { a[2], a[1], a[5] - a[2] + 1, a[4] - a[1] + 1 };
+            }
         }
     }
 }
