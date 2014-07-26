@@ -17,14 +17,8 @@ namespace CellDiff
             public string Targets;
             public bool SeparateDestinateions;
             public string Destinations;
-            public bool SourceUnderline;
-            public bool SourceStrikeout;
-            public bool SourceBold;
-            public int SourceColor;
-            public bool TargetUnderline;
-            public bool TargetStrikeout;
-            public bool TargetBold;
-            public int TargetColor;
+            public Decoration SourceDecoration;
+            public Decoration TargetDecoration;
         }
 
         public OptionValues Options;
@@ -55,14 +49,14 @@ namespace CellDiff
             targets.Text = Options.Targets;
             separateDestination.Checked = Options.SeparateDestinateions;
             destinations.Text = Options.Destinations;
-            sourceUnderline.Checked = Options.SourceUnderline;
-            sourceStrikeout.Checked = Options.SourceStrikeout;
-            sourceBold.Checked = Options.SourceBold;
-            //sourceColor.Text = Options.SourceColor;
-            targetUnderline.Checked = Options.TargetUnderline;
-            targetStrikeout.Checked = Options.TargetStrikeout;
-            targetBold.Checked = Options.TargetBold;
-            //targetColor.Text = Options.TargetColor;
+            sourceUnderline.Checked = Options.SourceDecoration.Underline;
+            sourceStrikeout.Checked = Options.SourceDecoration.Strikeout;
+            sourceBold.Checked = Options.SourceDecoration.Bold;
+            //sourceColor.Text = Options.SourceDecoration.Color;
+            targetUnderline.Checked = Options.TargetDecoration.Underline;
+            targetStrikeout.Checked = Options.TargetDecoration.Strikeout;
+            targetBold.Checked = Options.TargetDecoration.Bold;
+            //targetColor.Text = Options.TargetDecoration.Color;
         }
 
         private void ok_Click(object sender, EventArgs e)
@@ -72,12 +66,12 @@ namespace CellDiff
             args.Options.Targets = targets.Text.Trim();
             args.Options.SeparateDestinateions = separateDestination.Checked;
             args.Options.Destinations = destinations.Text.Trim();
-            args.Options.SourceUnderline = sourceUnderline.Checked;
-            args.Options.SourceStrikeout = sourceStrikeout.Checked;
-            args.Options.SourceBold = sourceBold.Checked;
-            args.Options.TargetUnderline = targetUnderline.Checked;
-            args.Options.TargetStrikeout = targetStrikeout.Checked;
-            args.Options.TargetBold = targetBold.Checked;
+            args.Options.SourceDecoration.Underline = sourceUnderline.Checked;
+            args.Options.SourceDecoration.Strikeout = sourceStrikeout.Checked;
+            args.Options.SourceDecoration.Bold = sourceBold.Checked;
+            args.Options.TargetDecoration.Underline = targetUnderline.Checked;
+            args.Options.TargetDecoration.Strikeout = targetStrikeout.Checked;
+            args.Options.TargetDecoration.Bold = targetBold.Checked;
 
             var handler = ValidateOptions;
             if (handler != null)

@@ -5,17 +5,21 @@ using System.Text;
 using System.Windows.Forms;
 
 using NetOffice.ExcelApi;
+using NetOffice.ExcelApi.Enums;
 
+using Alissa.Differ2;
 
 namespace CellDiff
 {
-    public class CompareOptions
-    {
-    }
-
     public static class Logic
     {
-        public static void QuickCompare(NetOffice.ExcelApi.Application excel)
+        public class Options
+        {
+            public Decoration Src;
+            public Decoration Tgt;
+        }
+
+        public static void QuickCompare(NetOffice.ExcelApi.Application excel, Options options)
         {
             var selection = excel.Selection as Range;
             if (selection == null)
@@ -31,12 +35,12 @@ namespace CellDiff
                     if (area.Columns.Count == 2)
                     {
                         // Go vertical
-                        CompareCells(area.Columns[1], area.Columns[2], null, null);
+                        CompareRanges(area.Columns[1], area.Columns[2], null, options);
                     }
                     else if (area.Rows.Count == 2)
                     {
                         // GO horizontal
-                        CompareCells(area.Rows[1], area.Rows[2], null, null);
+                        CompareRanges(area.Rows[1], area.Rows[2], null, options);
                     }
                     else
                     {
@@ -55,7 +59,7 @@ namespace CellDiff
                         a1r == 1 && a2c == 1 && a1c == a2r ||
                         a1r == 1 && a2r == 1 && a1c == a2c)
                     {
-                        CompareCells(area1, area2, null, null);
+                        CompareRanges(area1, area2, null, options);
                     }
                     else
                     {
@@ -70,14 +74,77 @@ namespace CellDiff
             }
         }
 
-        public static void CompareCells(Range sources, Range targets, Range destinations, CompareOptions options)
+        public static void CompareRanges(Range sources, Range targets, Range destinations, Options options)
         {
             var src = sources.Cells.ToArray();
             var tgt = targets.Cells.ToArray();
             var dst = destinations == null ? null : destinations.Cells.ToArray();
 
             MessageBox.Show("src = " + string.Join(",", src.Select(r => r.Address(false, false)))
-                        + ", dst = " + string.Join(",", dst.Select(r => r.Address(false, false))));
+                        + ", tgt = " + string.Join(",", tgt.Select(r => r.Address(false, false))));
+
+            for (int i = 0; i < src.Length; i++)
+            {
+                CompareCells(src[i], tgt[i], (dst == null) ? null : dst[i], options);
+            }
+        }
+
+        private static readonly IDiffer<char> Differ = new GreedyDiffer<char>();
+
+        private static void CompareCells(Range src, Range tgt, Range dst, Options options)
+        {
+            var src_text = src.Text.ToString();
+            var tgt_text = tgt.Text.ToString();
+            var diff = Differ.Compare(src_text.ToCharArray(), tgt_text.ToCharArray()).ToCharArray();
+            if (dst == null)
+            {
+                src.Value2 = src_text;
+                tgt.Value2 = tgt_text;
+                int i = 0, j = 0;
+                foreach (var c in diff)
+                {
+                    switch (c)
+                    {
+                        case '-': Decorate(src.Characters(i++, 1), options.Src); break;
+                        case '+': Decorate(tgt.Characters(j++, 1), options.Tgt); break;
+                        case '=': i++; j++; break;
+                    }
+                }
+            }
+            else
+            {
+                int i = 0, j = 0;
+                var d = new StringBuilder();
+                foreach (var c in diff)
+                {
+                    switch (c)
+                    {
+                        case '-': d.Append(src_text[i++]); break;
+                        case '+': d.Append(tgt_text[j++]); break;
+                        case '=': d.Append(src_text[i++]); j++; break;
+                    }
+                }
+                dst.Value2 = d.ToString();
+                int k = 1;
+                foreach (var c in diff)
+                {
+                    switch (c)
+                    {
+                        case '-': Decorate(dst.Characters(k++, 1), options.Src); break;
+                        case '+': Decorate(dst.Characters(k++, 1), options.Tgt); break;
+                    }
+                }
+            }
+        }
+
+        private static void Decorate(Characters c, Decoration d)
+        {
+            var f = c.Font;
+            f.Underline = d.Underline ? XlUnderlineStyle.xlUnderlineStyleSingle : XlUnderlineStyle.xlUnderlineStyleNone;
+            f.Strikethrough = d.Strikeout;
+            f.Bold = d.Bold;
+            //f.Color = d.Color;
+            c.Dispose();
         }
 
         public static void Error(string s)

@@ -63,12 +63,16 @@ namespace CellDiff
             return Properties.Resources.RibbonUI;
         }
 
+        private static readonly Logic.Options QUICK_OPTIONS = new Logic.Options()
+        {
+            Src = new Decoration() { Strikeout = true, Bold = true },
+            Tgt = new Decoration() { Underline = true, Bold = true }
+        };
+
         private Advanced.OptionValues AdvancedOptions = new Advanced.OptionValues()
         {
-            SourceStrikeout = true,
-            SourceBold = true,
-            TargetUnderline = true,
-            TargetBold = true
+            SourceDecoration = new Decoration() { Strikeout = true, Bold = true },
+            TargetDecoration = new Decoration() { Underline = true, Bold = true }
         };
 
         public void OnAction(Office.IRibbonControl control)
@@ -80,7 +84,7 @@ namespace CellDiff
                     case "compareCellsButton":
                         using (var excel = Application.Application)
                         {
-                            Logic.QuickCompare(excel);
+                            Logic.QuickCompare(excel, QUICK_OPTIONS);
                         }
                         break;
                     case "dialogLauncher":
