@@ -148,7 +148,7 @@ namespace CellDiff
                 f.Underline = d.Underline ? XlUnderlineStyle.xlUnderlineStyleSingle : XlUnderlineStyle.xlUnderlineStyleNone;
                 f.Strikethrough = d.Strikeout;
                 f.Bold = d.Bold;
-                //f.Color = d.Color;
+                f.Color = d.Color;
             }
         }
 
