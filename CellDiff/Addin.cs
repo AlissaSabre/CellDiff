@@ -65,8 +65,8 @@ namespace CellDiff
 
         private static readonly Logic.Options QUICK_OPTIONS = new Logic.Options()
         {
-            Src = new Decoration() { Strikeout = true, Bold = true },
-            Tgt = new Decoration() { Underline = true, Bold = true }
+            Src = new Decoration() { Strikeout = true, Bold = true, Color = 0x000080 },
+            Tgt = new Decoration() { Underline = true, Bold = true, Color = 0x008000 }
         };
 
         private Advanced.OptionValues AdvancedOptions = new Advanced.OptionValues()
