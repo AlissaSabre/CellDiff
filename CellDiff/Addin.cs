@@ -9,12 +9,10 @@ using System.Threading;
 using System.Windows.Forms;
 
 using NetOffice;
-using Excel = NetOffice.ExcelApi;
+using NetOffice.ExcelApi;
 using NetOffice.ExcelApi.Enums;
-using Office = NetOffice.OfficeApi;
+using NetOffice.OfficeApi;
 using NetOffice.OfficeApi.Enums;
-using VBIDE = NetOffice.VBIDEApi;
-using NetOffice.VBIDEApi.Enums;
 using NetOffice.Tools;
 using NetOffice.ExcelApi.Tools;
 
@@ -78,16 +76,23 @@ namespace CellDiff
             TargetDecoration = DEFAULT_TARGET_DECORATION
         };
 
-        public void OnAction(Office.IRibbonControl control)
+        public void OnAction(IRibbonControl control)
         {
             try
             {
                 switch (control.Id)
                 {
                     case "compareCellsButton":
-                        using (var excel = Application.Application)
+                        using (var selection = Application.Selection as IDisposable)
                         {
-                            Logic.QuickCompare(excel, QUICK_OPTIONS);
+                            if (selection is Range)
+                            {
+                                Logic.QuickCompare(selection as Range, QUICK_OPTIONS);
+                            }
+                            else
+                            {
+                                Logic.Error("Please select cells to compare.");
+                            }
                         }
                         break;
                     case "dialogLauncher":

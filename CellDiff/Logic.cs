@@ -19,15 +19,8 @@ namespace CellDiff
             public Decoration Tgt;
         }
 
-        public static void QuickCompare(NetOffice.ExcelApi.Application excel, Options options)
+        internal static void QuickCompare(Range selection, Options options)
         {
-            var selection = excel.Selection as Range;
-            if (selection == null)
-            {
-                Error("Please select cells to compare.");
-                return;
-            }
-
             switch (selection.Areas.Count)
             {
                 case 1:
@@ -74,7 +67,7 @@ namespace CellDiff
             }
         }
 
-        public static void CompareRanges(Range sources, Range targets, Range destinations, Options options)
+        internal static void CompareRanges(Range sources, Range targets, Range destinations, Options options)
         {
             var src = sources.Cells;
             var tgt = targets.Cells;
