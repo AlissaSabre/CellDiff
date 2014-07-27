@@ -63,16 +63,19 @@ namespace CellDiff
             return Properties.Resources.RibbonUI;
         }
 
+        private static readonly Decoration DEFAULT_SOURCE_DECORATION = new Decoration() { Strikeout = true, Bold = true, Color = 0x000080 };
+        private static readonly Decoration DEFAULT_TARGET_DECORATION = new Decoration() { Underline = true, Bold = true, Color = 0x008000 }; 
+
         private static readonly Logic.Options QUICK_OPTIONS = new Logic.Options()
         {
-            Src = new Decoration() { Strikeout = true, Bold = true, Color = 0x000080 },
-            Tgt = new Decoration() { Underline = true, Bold = true, Color = 0x008000 }
+            Src = DEFAULT_SOURCE_DECORATION,
+            Tgt = DEFAULT_TARGET_DECORATION
         };
 
         private Advanced.OptionValues AdvancedOptions = new Advanced.OptionValues()
         {
-            SourceDecoration = new Decoration() { Strikeout = true, Bold = true },
-            TargetDecoration = new Decoration() { Underline = true, Bold = true }
+            SourceDecoration = DEFAULT_SOURCE_DECORATION,
+            TargetDecoration = DEFAULT_TARGET_DECORATION
         };
 
         public void OnAction(Office.IRibbonControl control)
