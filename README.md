@@ -1,9 +1,9 @@
 CellDiff
 ========
 
-An Excel plug-in to compare cell contents
+An Excel add-in to compare cell contents
 
-This program will eventually be a Microsoft Office Excel plug-in.
+This program will eventually be a Microsoft Office Excel add-in.
 It will provide some functionality to compare cell contents on a worksheet interactively.
 
 It is just started recently and under a heavy yet slow development.
