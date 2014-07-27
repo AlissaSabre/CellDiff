@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace Alissa.Differ2
     /// A variation of the greedy algorithm by Eugene W. Myers (1986). O((M+N)*D).
     /// It means this algorithm works fast if given two lists are _similar_.
     /// </summary>
+    [ComVisible(false)]
     public class GreedyDiffer<T> : DifferBase<T>
     {
         public GreedyDiffer() : base() { }

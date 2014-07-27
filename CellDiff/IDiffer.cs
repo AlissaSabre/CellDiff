@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Alissa.Differ2
@@ -8,6 +9,7 @@ namespace Alissa.Differ2
     /// <summary>
     /// The Differ interface.
     /// </summary>
+    [ComVisible(false)]
     public interface IDiffer<T>
     {
         string Compare(IList<T> src, IList<T> dst);

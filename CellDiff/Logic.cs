@@ -11,7 +11,7 @@ using Alissa.Differ2;
 
 namespace CellDiff
 {
-    public static class Logic
+    static class Logic
     {
         public class Options
         {
