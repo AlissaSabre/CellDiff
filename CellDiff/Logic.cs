@@ -96,6 +96,7 @@ namespace CellDiff
             var src_text = src.Text.ToString();
             var tgt_text = tgt.Text.ToString();
             var diff = Differ.Compare(src_text.ToCharArray(), tgt_text.ToCharArray()).ToCharArray();
+
             if (dst == null)
             {
                 src.Value2 = src_text;
@@ -105,8 +106,8 @@ namespace CellDiff
                 {
                     switch (c)
                     {
-                        case '-': Decorate(src.Characters(i++, 1), options.Src); break;
-                        case '+': Decorate(tgt.Characters(j++, 1), options.Tgt); break;
+                        case '-': Decorate(src, i++, 1, options.Src); break;
+                        case '+': Decorate(tgt, j++, 1, options.Tgt); break;
                         case '=': i++; j++; break;
                     }
                 }
@@ -125,26 +126,30 @@ namespace CellDiff
                     }
                 }
                 dst.Value2 = d.ToString();
+
                 int k = 1;
                 foreach (var c in diff)
                 {
                     switch (c)
                     {
-                        case '-': Decorate(dst.Characters(k++, 1), options.Src); break;
-                        case '+': Decorate(dst.Characters(k++, 1), options.Tgt); break;
+                        case '-': Decorate(dst, k++, 1, options.Src); break;
+                        case '+': Decorate(dst, k++, 1, options.Tgt); break;
+                        case '=': k++; break;
                     }
                 }
             }
         }
 
-        private static void Decorate(Characters c, Decoration d)
+        private static void Decorate(Range cell, int start, int length, Decoration d)
         {
-            var f = c.Font;
-            f.Underline = d.Underline ? XlUnderlineStyle.xlUnderlineStyleSingle : XlUnderlineStyle.xlUnderlineStyleNone;
-            f.Strikethrough = d.Strikeout;
-            f.Bold = d.Bold;
-            //f.Color = d.Color;
-            c.Dispose();
+            using (var c = cell.Characters(start, length))
+            {
+                var f = c.Font;
+                f.Underline = d.Underline ? XlUnderlineStyle.xlUnderlineStyleSingle : XlUnderlineStyle.xlUnderlineStyleNone;
+                f.Strikethrough = d.Strikeout;
+                f.Bold = d.Bold;
+                //f.Color = d.Color;
+            }
         }
 
         public static void Error(string s)
