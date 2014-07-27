@@ -52,11 +52,11 @@ namespace CellDiff
             sourceUnderline.Checked = Options.SourceDecoration.Underline;
             sourceStrikeout.Checked = Options.SourceDecoration.Strikeout;
             sourceBold.Checked = Options.SourceDecoration.Bold;
-            //sourceColor.Text = Options.SourceDecoration.Color;
+            sourceColor.Text = Options.SourceDecoration.Color.ToString("X6");
             targetUnderline.Checked = Options.TargetDecoration.Underline;
             targetStrikeout.Checked = Options.TargetDecoration.Strikeout;
             targetBold.Checked = Options.TargetDecoration.Bold;
-            //targetColor.Text = Options.TargetDecoration.Color;
+            targetColor.Text = Options.TargetDecoration.Color.ToString("X6");
         }
 
         private void ok_Click(object sender, EventArgs e)

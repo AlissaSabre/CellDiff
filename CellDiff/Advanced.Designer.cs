@@ -39,19 +39,19 @@
             this.separateDestination = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.sourceColor = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.sourceBold = new System.Windows.Forms.CheckBox();
             this.sourceStrikeout = new System.Windows.Forms.CheckBox();
             this.sourceUnderline = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.targetColor = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.targetBold = new System.Windows.Forms.CheckBox();
             this.targetStrikeout = new System.Windows.Forms.CheckBox();
             this.targetUnderline = new System.Windows.Forms.CheckBox();
             this.ok = new System.Windows.Forms.Button();
             this.cancel = new System.Windows.Forms.Button();
+            this.sourceColor = new System.Windows.Forms.TextBox();
+            this.targetColor = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -80,20 +80,20 @@
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.sources);
             this.groupBox1.Controls.Add(this.targets);
             this.groupBox1.Controls.Add(this.label2);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
             // groupBox2
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.destinations);
             this.groupBox2.Controls.Add(this.separateDestination);
             this.groupBox2.Controls.Add(this.radioButton1);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
@@ -119,21 +119,14 @@
             // 
             // groupBox3
             // 
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.sourceColor);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.sourceBold);
             this.groupBox3.Controls.Add(this.sourceStrikeout);
             this.groupBox3.Controls.Add(this.sourceUnderline);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            // 
-            // sourceColor
-            // 
-            resources.ApplyResources(this.sourceColor, "sourceColor");
-            this.sourceColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.sourceColor.FormattingEnabled = true;
-            this.sourceColor.Name = "sourceColor";
             // 
             // label3
             // 
@@ -160,21 +153,14 @@
             // 
             // groupBox4
             // 
-            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.targetColor);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.targetBold);
             this.groupBox4.Controls.Add(this.targetStrikeout);
             this.groupBox4.Controls.Add(this.targetUnderline);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
-            // 
-            // targetColor
-            // 
-            resources.ApplyResources(this.targetColor, "targetColor");
-            this.targetColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.targetColor.FormattingEnabled = true;
-            this.targetColor.Name = "targetColor";
             // 
             // label4
             // 
@@ -201,18 +187,28 @@
             // 
             // ok
             // 
-            resources.ApplyResources(this.ok, "ok");
             this.ok.DialogResult = System.Windows.Forms.DialogResult.OK;
+            resources.ApplyResources(this.ok, "ok");
             this.ok.Name = "ok";
             this.ok.UseVisualStyleBackColor = true;
             this.ok.Click += new System.EventHandler(this.ok_Click);
             // 
             // cancel
             // 
-            resources.ApplyResources(this.cancel, "cancel");
             this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.cancel, "cancel");
             this.cancel.Name = "cancel";
             this.cancel.UseVisualStyleBackColor = true;
+            // 
+            // sourceColor
+            // 
+            resources.ApplyResources(this.sourceColor, "sourceColor");
+            this.sourceColor.Name = "sourceColor";
+            // 
+            // targetColor
+            // 
+            resources.ApplyResources(this.targetColor, "targetColor");
+            this.targetColor.Name = "targetColor";
             // 
             // Advanced
             // 
@@ -256,18 +252,18 @@
         private System.Windows.Forms.RadioButton separateDestination;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ComboBox sourceColor;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox sourceBold;
         private System.Windows.Forms.CheckBox sourceStrikeout;
         private System.Windows.Forms.CheckBox sourceUnderline;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ComboBox targetColor;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox targetBold;
         private System.Windows.Forms.CheckBox targetStrikeout;
         private System.Windows.Forms.CheckBox targetUnderline;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.Button cancel;
+        private System.Windows.Forms.TextBox sourceColor;
+        private System.Windows.Forms.TextBox targetColor;
     }
 }

@@ -19,20 +19,27 @@ namespace CellDiff
             public Decoration Tgt;
         }
 
+        /// <summary>
+        /// A sort of a tiebreaker for a quick compare 
+        /// </summary>
+        private static bool PreferVertical = false;
+
         internal static void QuickCompare(Range selection, Options options)
         {
             switch (selection.Areas.Count)
             {
                 case 1:
                     var area = selection.Areas[1];
-                    if (area.Columns.Count == 2)
+                    if (area.Columns.Count == 2 && (PreferVertical || area.Rows.Count != 2))
                     {
                         // Go vertical
+                        PreferVertical = true;
                         CompareRanges(area.Columns[1], area.Columns[2], null, options);
                     }
                     else if (area.Rows.Count == 2)
                     {
                         // GO horizontal
+                        PreferVertical = false;
                         CompareRanges(area.Rows[1], area.Rows[2], null, options);
                     }
                     else

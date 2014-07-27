@@ -118,95 +118,191 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 23</value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 12</value>
+    <value>76, 13</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>比較元のセル:</value>
   </data>
+  <data name="sources.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 20</value>
+  </data>
+  <data name="sources.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 20</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 50</value>
+  </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 12</value>
+    <value>76, 13</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>比較先のセル:</value>
   </data>
+  <data name="targets.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 47</value>
+  </data>
+  <data name="targets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 20</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 13</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>440, 75</value>
+  </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>比較するセル</value>
   </data>
+  <data name="destinations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 67</value>
+  </data>
+  <data name="destinations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 20</value>
+  </data>
+  <data name="separateDestination.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 43</value>
+  </data>
   <data name="separateDestination.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 16</value>
+    <value>122, 17</value>
   </data>
   <data name="separateDestination.Text" xml:space="preserve">
     <value>別のセルに書き込む:</value>
   </data>
+  <data name="radioButton1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 20</value>
+  </data>
   <data name="radioButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 16</value>
+    <value>187, 17</value>
   </data>
   <data name="radioButton1.Text" xml:space="preserve">
     <value>比較元と比較先のセルを更新する</value>
   </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 94</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>440, 94</value>
+  </data>
   <data name="groupBox2.Text" xml:space="preserve">
     <value>結果の配置</value>
   </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 95</value>
+  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 12</value>
+    <value>65, 13</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>フォントの色:</value>
   </data>
+  <data name="sourceBold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 67</value>
+  </data>
   <data name="sourceBold.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 16</value>
+    <value>78, 17</value>
   </data>
   <data name="sourceBold.Text" xml:space="preserve">
     <value>太字にする</value>
   </data>
+  <data name="sourceStrikeout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 43</value>
+  </data>
   <data name="sourceStrikeout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 16</value>
+    <value>106, 17</value>
   </data>
   <data name="sourceStrikeout.Text" xml:space="preserve">
     <value>取り消し線を引く</value>
   </data>
+  <data name="sourceUnderline.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 20</value>
+  </data>
   <data name="sourceUnderline.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 16</value>
+    <value>77, 17</value>
   </data>
   <data name="sourceUnderline.Text" xml:space="preserve">
     <value>下線を引く</value>
   </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 195</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 127</value>
+  </data>
   <data name="groupBox3.Text" xml:space="preserve">
     <value>比較元の変更箇所</value>
   </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 95</value>
+  </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 12</value>
+    <value>65, 13</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>フォントの色:</value>
   </data>
+  <data name="targetBold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 67</value>
+  </data>
   <data name="targetBold.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 16</value>
+    <value>78, 17</value>
   </data>
   <data name="targetBold.Text" xml:space="preserve">
     <value>太字にする</value>
   </data>
+  <data name="targetStrikeout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 43</value>
+  </data>
   <data name="targetStrikeout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 16</value>
+    <value>106, 17</value>
   </data>
   <data name="targetStrikeout.Text" xml:space="preserve">
     <value>取り消し線を引く</value>
   </data>
+  <data name="targetUnderline.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 20</value>
+  </data>
   <data name="targetUnderline.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 16</value>
+    <value>77, 17</value>
   </data>
   <data name="targetUnderline.Text" xml:space="preserve">
     <value>下線を引く</value>
   </data>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>236, 195</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 127</value>
+  </data>
   <data name="groupBox4.Text" xml:space="preserve">
     <value>比較先の変更箇所</value>
+  </data>
+  <data name="ok.Location" type="System.Drawing.Point, System.Drawing">
+    <value>296, 332</value>
+  </data>
+  <data name="ok.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 25</value>
   </data>
   <data name="ok.Text" xml:space="preserve">
     <value>比較する</value>
   </data>
+  <data name="cancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>377, 332</value>
+  </data>
+  <data name="cancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 25</value>
+  </data>
   <data name="cancel.Text" xml:space="preserve">
     <value>キャンセル</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>464, 369</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>高度な比較オプション</value>
