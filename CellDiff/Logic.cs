@@ -76,66 +76,88 @@ namespace CellDiff
 
         public static void CompareRanges(Range sources, Range targets, Range destinations, Options options)
         {
-            var src = sources.Cells.ToArray();
-            var tgt = targets.Cells.ToArray();
-            var dst = destinations == null ? null : destinations.Cells.ToArray();
+            var src = sources.Cells;
+            var tgt = targets.Cells;
 
-            MessageBox.Show("src = " + string.Join(",", src.Select(r => r.Address(false, false)))
-                        + ", tgt = " + string.Join(",", tgt.Select(r => r.Address(false, false))));
-
-            for (int i = 0; i < src.Length; i++)
+            if (destinations == null)
             {
-                CompareCells(src[i], tgt[i], (dst == null) ? null : dst[i], options);
-            }
-        }
-
-        private static readonly IDiffer<char> Differ = new GreedyDiffer<char>();
-
-        private static void CompareCells(Range src, Range tgt, Range dst, Options options)
-        {
-            var src_text = src.Text.ToString();
-            var tgt_text = tgt.Text.ToString();
-            var diff = Differ.Compare(src_text.ToCharArray(), tgt_text.ToCharArray()).ToCharArray();
-
-            if (dst == null)
-            {
-                src.Value2 = src_text;
-                tgt.Value2 = tgt_text;
-                int i = 1, j = 1;
-                foreach (var c in diff)
+                var length = src.Count;
+                for (int i = 1; i <= length; i++)
                 {
-                    switch (c)
+                    using (Range s = src[i], t = tgt[i])
                     {
-                        case '-': Decorate(src, i++, 1, options.Src); break;
-                        case '+': Decorate(tgt, j++, 1, options.Tgt); break;
-                        case '=': i++; j++; break;
+                        CompareCells2(s, t, options);
                     }
                 }
             }
             else
             {
-                int i = 0, j = 0;
-                var d = new StringBuilder();
-                foreach (var c in diff)
+                var dst = destinations.Cells;
+                var length = src.Count;
+                for (int i = 1; i <= length; i++)
                 {
-                    switch (c)
+                    using (Range s = src[i], t = tgt[i], d = dst[i])
                     {
-                        case '-': d.Append(src_text[i++]); break;
-                        case '+': d.Append(tgt_text[j++]); break;
-                        case '=': d.Append(src_text[i++]); j++; break;
+                        CompareCells3(s, t, d, options);
                     }
                 }
-                dst.Value2 = d.ToString();
+            }
 
-                int k = 1;
-                foreach (var c in diff)
+        }
+
+        private static readonly IDiffer<char> Differ = new GreedyDiffer<char>();
+
+        private static void CompareCells2(Range src, Range tgt, Options options)
+        {
+            var src_text = src.Text.ToString();
+            var tgt_text = tgt.Text.ToString();
+            var diff = Differ.Compare(src_text.ToCharArray(), tgt_text.ToCharArray()).Runs();
+
+            src.Value2 = src_text;
+            tgt.Value2 = tgt_text;
+
+            int i = 1, j = 1;
+            foreach (var t in diff)
+            {
+                var n = t.Item2;
+                switch (t.Item1)
                 {
-                    switch (c)
-                    {
-                        case '-': Decorate(dst, k++, 1, options.Src); break;
-                        case '+': Decorate(dst, k++, 1, options.Tgt); break;
-                        case '=': k++; break;
-                    }
+                    case '-': Decorate(src, i, n, options.Src); i += n; break;
+                    case '+': Decorate(tgt, j, n, options.Tgt); j += n; break;
+                    case '=': i += n; j += n; break;
+                }
+            }
+        }
+
+        private static void CompareCells3(Range src, Range tgt, Range dst, Options options)
+        {
+            var src_text = src.Text.ToString();
+            var tgt_text = tgt.Text.ToString();
+            var diff = Differ.Compare(src_text.ToCharArray(), tgt_text.ToCharArray()).Runs().ToList();
+
+            int i = 0, j = 0;
+            var d = new StringBuilder();
+            foreach (var t in diff)
+            {
+                var n = t.Item2;
+                switch (t.Item1)
+                {
+                    case '-': d.Append(src_text, i, n); i += n; break;
+                    case '+': d.Append(tgt_text, j, n); j += n; break;
+                    case '=': d.Append(src_text, i, n); i += n; j += n; break;
+                }
+            }
+            dst.Value2 = d.ToString();
+
+            int k = 1;
+            foreach (var t in diff)
+            {
+                var n = t.Item2;
+                switch (t.Item1)
+                {
+                    case '-': Decorate(dst, k, n, options.Src); k += n; break;
+                    case '+': Decorate(dst, k, n, options.Tgt); k += n; break;
+                    case '=': k += n; break;
                 }
             }
         }
@@ -155,6 +177,36 @@ namespace CellDiff
         public static void Error(string s)
         {
             MessageBox.Show(s);
+        }
+
+        public static IEnumerable<Tuple<T, int>> Runs<T>(this IEnumerable<T> source)
+        {
+            T last = default(T);
+            int run = 0;
+            bool first = true;
+            foreach (var item in source)
+            {
+                if (first)
+                {
+                    first = false;
+                    last = item;
+                    run = 1;
+                }
+                else if (EqualityComparer<T>.Default.Equals(last, item))
+                {
+                    run++;
+                }
+                else
+                {
+                    yield return Tuple.Create(last, run);
+                    last = item;
+                    run = 1;
+                }
+            }
+            if (run > 0)
+            {
+                yield return Tuple.Create(last, run);
+            }
         }
     }
 }
