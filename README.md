@@ -1,13 +1,19 @@
 CellDiff
 ========
 
-An Excel add-in to compare cell contents
+An Excel plug-in to compare (diff) cell contents. Written in C# with NetOffice.
+
+## Summary
 
 This program will eventually be a Microsoft Office Excel add-in.
-It will provide some functionality to compare cell contents on a worksheet interactively.
+It will provide some functionality to compare cell contents (like diff command) on a worksheet interactively.
 
 It is just started recently and under a heavy yet slow development.
-Source files committed even to the master branch may not be compile for the moment.
+Source files even committed to the master branch may not be compile for the moment.
+
+## Status
+
+* (2014-7-28) The core functionality started to work.
 
 ## Target environment
 
