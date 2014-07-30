@@ -80,6 +80,8 @@ namespace CellDiff
         {
             try
             {
+                Application.ScreenUpdating = false;
+
                 switch (control.Id)
                 {
                     case "compareCellsButton":
@@ -120,6 +122,10 @@ namespace CellDiff
                     dlg.Exception = e;
                     dlg.ShowDialog();
                 }
+            }
+            finally
+            {
+                Application.ScreenUpdating = true;
             }
         }
 

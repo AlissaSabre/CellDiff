@@ -19,6 +19,8 @@ namespace CellDiff
             public Decoration Tgt;
         }
 
+        public static TimeSpan DiffTime;
+
         /// <summary>
         /// A sort of a tiebreaker for a quick compare 
         /// </summary>
@@ -26,6 +28,9 @@ namespace CellDiff
 
         internal static void QuickCompare(Range selection, Options options)
         {
+            DiffTime = TimeSpan.Zero;
+            var started = DateTime.Now;
+
             switch (selection.Areas.Count)
             {
                 case 1:
@@ -72,6 +77,10 @@ namespace CellDiff
                     Error("WRONG SELECTION");
                     return;
             }
+
+            var GlueTime = DateTime.Now - started - DiffTime;
+
+            MessageBox.Show(string.Format("Diff = {0}, Glue = {1}", DiffTime, GlueTime));
         }
 
         internal static void CompareRanges(Range sources, Range targets, Range destinations, Options options)
@@ -105,7 +114,20 @@ namespace CellDiff
 
         }
 
-        private static readonly IDiffer<char> Differ = new GreedyDiffer<char>();
+        private static readonly IDiffer<char> Differ = new TimedGreedyDiffer<char>();
+
+        private class TimedGreedyDiffer<T> : IDiffer<T>
+        {
+            private readonly IDiffer<T> differ = new GreedyDiffer<T>();
+
+            public string Compare(IList<T> src, IList<T> dst)
+            {
+                var started = DateTime.Now;
+                var d = differ.Compare(src, dst);
+                DiffTime += (DateTime.Now - started);
+                return d;
+            }
+        }
 
         private static void CompareCells2(Range src, Range tgt, Options options)
         {
