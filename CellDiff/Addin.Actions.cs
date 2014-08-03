@@ -78,6 +78,10 @@ namespace CellDiff
             }
         }
 
+        private readonly TimeSpan UPDATE_TIME_DELTA = TimeSpan.FromSeconds(5);
+
+        private const int UPDATE_INDEX_DIVIDER = 200;
+
         private void CompareRanges(Range sources, Range targets, Range destinations, Options options)
         {
             var src = sources.Cells;
@@ -85,14 +89,22 @@ namespace CellDiff
             var dst = (destinations == null) ? null : destinations.Cells;
 
             var length = src.Count;
+            var update_index_delta = length / UPDATE_INDEX_DIVIDER;
+            var next_update_index = 0;
+            var next_update_time = DateTime.Now;
             for (int i = 1; i <= length; i++)
             {
-                using (Range s = src[i], t = tgt[i], d = (dst == null) ? null : dst[i])
+                if (i > next_update_index || DateTime.Now > next_update_time)
                 {
                     Application.ScreenUpdating = true;
                     Application.StatusBar = string.Format(Resources.ProgressMessage, (i - 1) / (double)length);
                     Application.ScreenUpdating = false;
+                    next_update_index = i + update_index_delta;
+                    next_update_time = DateTime.Now + UPDATE_TIME_DELTA;
+                }
 
+                using (Range s = src[i], t = tgt[i], d = (dst == null) ? null : dst[i])
+                {
                     if (dst == null)
                     {
                         CompareCells2(s, t, options);
