@@ -80,8 +80,6 @@ namespace CellDiff
         {
             try
             {
-                Application.ScreenUpdating = false;
-
                 switch (control.Id)
                 {
                     case "compareCellsButton":
@@ -125,7 +123,8 @@ namespace CellDiff
             }
             finally
             {
-                Application.ScreenUpdating = true;
+                // Never leave the status bar in our own.
+                Application.StatusBar = false;
             }
         }
 

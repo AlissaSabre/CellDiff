@@ -9,6 +9,8 @@ using NetOffice.ExcelApi.Enums;
 
 using Alissa.Differ2;
 
+using CellDiff.Properties;
+
 namespace CellDiff
 {
     static class Logic
@@ -19,8 +21,6 @@ namespace CellDiff
             public Decoration Tgt;
         }
 
-        public static TimeSpan DiffTime;
-
         /// <summary>
         /// A sort of a tiebreaker for a quick compare 
         /// </summary>
@@ -28,9 +28,6 @@ namespace CellDiff
 
         internal static void QuickCompare(Range selection, Options options)
         {
-            DiffTime = TimeSpan.Zero;
-            var started = DateTime.Now;
-
             switch (selection.Areas.Count)
             {
                 case 1:
@@ -77,57 +74,35 @@ namespace CellDiff
                     Error("WRONG SELECTION");
                     return;
             }
-
-            var GlueTime = DateTime.Now - started - DiffTime;
-
-            MessageBox.Show(string.Format("Diff = {0}, Glue = {1}", DiffTime, GlueTime));
         }
 
         internal static void CompareRanges(Range sources, Range targets, Range destinations, Options options)
         {
             var src = sources.Cells;
             var tgt = targets.Cells;
+            var dst = (destinations == null) ? null : destinations.Cells;
 
-            if (destinations == null)
+            var app = src.Application;
+
+            var length = src.Count;
+            for (int i = 1; i <= length; i++)
             {
-                var length = src.Count;
-                for (int i = 1; i <= length; i++)
+                using (Range s = src[i], t = tgt[i], d = (dst == null ? null : dst[i]))
                 {
-                    using (Range s = src[i], t = tgt[i])
+                    app.StatusBar = string.Format(Resources.ProgressMessage, (i - 1) / (double)length);
+                    if (dst == null)
                     {
                         CompareCells2(s, t, options);
                     }
-                }
-            }
-            else
-            {
-                var dst = destinations.Cells;
-                var length = src.Count;
-                for (int i = 1; i <= length; i++)
-                {
-                    using (Range s = src[i], t = tgt[i], d = dst[i])
+                    else
                     {
                         CompareCells3(s, t, d, options);
                     }
                 }
             }
-
         }
 
-        private static readonly IDiffer<char> Differ = new TimedGreedyDiffer<char>();
-
-        private class TimedGreedyDiffer<T> : IDiffer<T>
-        {
-            private readonly IDiffer<T> differ = new GreedyDiffer<T>();
-
-            public string Compare(IList<T> src, IList<T> dst)
-            {
-                var started = DateTime.Now;
-                var d = differ.Compare(src, dst);
-                DiffTime += (DateTime.Now - started);
-                return d;
-            }
-        }
+        private static readonly IDiffer<char> Differ = new GreedyDiffer<char>();
 
         private static void CompareCells2(Range src, Range tgt, Options options)
         {
