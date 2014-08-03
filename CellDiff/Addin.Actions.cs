@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using NetOffice;
 using NetOffice.ExcelApi;
 using NetOffice.ExcelApi.Enums;
+using NetOffice.ExcelApi.Tools;
 
 using Alissa.Differ2;
 
@@ -13,7 +15,7 @@ using CellDiff.Properties;
 
 namespace CellDiff
 {
-    static class Logic
+    public partial class Addin : COMAddin
     {
         public class Options
         {
@@ -26,7 +28,7 @@ namespace CellDiff
         /// </summary>
         private static bool PreferVertical = false;
 
-        internal static void QuickCompare(Range selection, Options options)
+        void QuickCompare(Range selection, Options options)
         {
             switch (selection.Areas.Count)
             {
@@ -76,20 +78,21 @@ namespace CellDiff
             }
         }
 
-        internal static void CompareRanges(Range sources, Range targets, Range destinations, Options options)
+        private void CompareRanges(Range sources, Range targets, Range destinations, Options options)
         {
             var src = sources.Cells;
             var tgt = targets.Cells;
             var dst = (destinations == null) ? null : destinations.Cells;
 
-            var app = src.Application;
-
             var length = src.Count;
             for (int i = 1; i <= length; i++)
             {
-                using (Range s = src[i], t = tgt[i], d = (dst == null ? null : dst[i]))
+                using (Range s = src[i], t = tgt[i], d = (dst == null) ? null : dst[i])
                 {
-                    app.StatusBar = string.Format(Resources.ProgressMessage, (i - 1) / (double)length);
+                    Application.ScreenUpdating = true;
+                    Application.StatusBar = string.Format(Resources.ProgressMessage, (i - 1) / (double)length);
+                    Application.ScreenUpdating = false;
+
                     if (dst == null)
                     {
                         CompareCells2(s, t, options);
@@ -104,7 +107,7 @@ namespace CellDiff
 
         private static readonly IDiffer<char> Differ = new GreedyDiffer<char>();
 
-        private static void CompareCells2(Range src, Range tgt, Options options)
+        private void CompareCells2(Range src, Range tgt, Options options)
         {
             var src_text = src.Text.ToString();
             var tgt_text = tgt.Text.ToString();
@@ -126,7 +129,7 @@ namespace CellDiff
             }
         }
 
-        private static void CompareCells3(Range src, Range tgt, Range dst, Options options)
+        private void CompareCells3(Range src, Range tgt, Range dst, Options options)
         {
             var src_text = src.Text.ToString();
             var tgt_text = tgt.Text.ToString();
@@ -159,7 +162,7 @@ namespace CellDiff
             }
         }
 
-        private static void Decorate(Range cell, int start, int length, Decoration d)
+        private void Decorate(Range cell, int start, int length, Decoration d)
         {
             using (var c = cell.Characters(start, length))
             {
@@ -171,39 +174,9 @@ namespace CellDiff
             }
         }
 
-        public static void Error(string s)
+        void Error(string s)
         {
             MessageBox.Show(s);
-        }
-
-        public static IEnumerable<Tuple<T, int>> Runs<T>(this IEnumerable<T> source)
-        {
-            T last = default(T);
-            int run = 0;
-            bool first = true;
-            foreach (var item in source)
-            {
-                if (first)
-                {
-                    first = false;
-                    last = item;
-                    run = 1;
-                }
-                else if (EqualityComparer<T>.Default.Equals(last, item))
-                {
-                    run++;
-                }
-                else
-                {
-                    yield return Tuple.Create(last, run);
-                    last = item;
-                    run = 1;
-                }
-            }
-            if (run > 0)
-            {
-                yield return Tuple.Create(last, run);
-            }
         }
     }
 }

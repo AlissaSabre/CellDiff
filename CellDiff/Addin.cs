@@ -23,7 +23,7 @@ namespace CellDiff
     [COMAddin("CellDiff","Detect differences of texts in worksheet cells",3)]
     //[CustomUI("CellDiff.RibbonUI.xml")]
     [GuidAttribute("3DF43D38-7D7E-4B28-A5D9-CF795FF10A32"), ProgId("CellDiff.Addin")]
-    public class Addin : COMAddin
+    public partial class Addin : COMAddin
     {
         public Addin()
         {
@@ -64,7 +64,7 @@ namespace CellDiff
         private static readonly Decoration DEFAULT_SOURCE_DECORATION = new Decoration() { Strikeout = true, Bold = true, Color = 0x000080 };
         private static readonly Decoration DEFAULT_TARGET_DECORATION = new Decoration() { Underline = true, Bold = true, Color = 0x008000 }; 
 
-        private static readonly Logic.Options QUICK_OPTIONS = new Logic.Options()
+        private static readonly Options QUICK_OPTIONS = new Options()
         {
             Src = DEFAULT_SOURCE_DECORATION,
             Tgt = DEFAULT_TARGET_DECORATION
@@ -78,6 +78,7 @@ namespace CellDiff
 
         public void OnAction(IRibbonControl control)
         {
+            Application.ScreenUpdating = false;
             try
             {
                 switch (control.Id)
@@ -87,11 +88,11 @@ namespace CellDiff
                         {
                             if (selection is Range)
                             {
-                                Logic.QuickCompare(selection as Range, QUICK_OPTIONS);
+                                QuickCompare(selection as Range, QUICK_OPTIONS);
                             }
                             else
                             {
-                                Logic.Error("Please select cells to compare.");
+                                Error("Please select cells to compare.");
                             }
                         }
                         break;
@@ -125,6 +126,7 @@ namespace CellDiff
             {
                 // Never leave the status bar in our own.
                 Application.StatusBar = false;
+                Application.ScreenUpdating = true;
             }
         }
 
