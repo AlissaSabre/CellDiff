@@ -18,6 +18,8 @@ using NetOffice.ExcelApi.Tools;
 
 using Alissa.GUI;
 
+using CellDiff.Properties;
+
 namespace CellDiff
 {
     [COMAddin("CellDiff","Detect differences of texts in worksheet cells",3)]
@@ -27,19 +29,15 @@ namespace CellDiff
     {
         public Addin()
         {
-            this.OnStartupComplete += new OnStartupCompleteEventHandler(Addin_OnStartupComplete);
+            //this.OnStartupComplete += new OnStartupCompleteEventHandler(Addin_OnStartupComplete);
             this.OnConnection += new OnConnectionEventHandler(Addin_OnConnection);
-            this.OnDisconnection += new OnDisconnectionEventHandler(Addin_OnDisconnection);
+            //this.OnDisconnection += new OnDisconnectionEventHandler(Addin_OnDisconnection);
         }
 
         #region IDTExtensibility2 Members
 
         void Addin_OnConnection(object Application, NetOffice.Tools.ext_ConnectMode ConnectMode, object AddInInst, ref Array custom)
-        {   
-            //using (var languageSettings = (Application as Excel.Application).LanguageSettings)
-            //{
-            //    System.Windows.Forms.Application.CurrentCulture = CultureInfo.GetCultureInfo(languageSettings.LanguageID(MsoAppLanguageID.msoLanguageIDUI));
-            //}
+        {
         }
 
         void Addin_OnStartupComplete(ref Array custom)
@@ -58,7 +56,8 @@ namespace CellDiff
 
         public override string GetCustomUI(string RibbonID)
         {
-            return Properties.Resources.RibbonUI;
+            SyncUICulture();
+            return Resources.RibbonUI;
         }
 
         private static readonly Decoration DEFAULT_SOURCE_DECORATION = new Decoration() { Strikeout = true, Bold = true, Color = 0x000080 };
@@ -131,5 +130,13 @@ namespace CellDiff
         }
 
         #endregion
+
+        private void SyncUICulture()
+        {
+            //using (var languageSettings = Application.LanguageSettings)
+            //{
+            //    Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageSettings.LanguageID(MsoAppLanguageID.msoLanguageIDUI));
+            //}
+        }
     }
 }
