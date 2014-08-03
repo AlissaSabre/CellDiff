@@ -80,7 +80,7 @@ namespace CellDiff
 
         private readonly TimeSpan UPDATE_TIME_DELTA = TimeSpan.FromSeconds(5);
 
-        private const int UPDATE_INDEX_DIVIDER = 200;
+        private const int UPDATE_INDEX_DIVIDER = 20;
 
         private void CompareRanges(Range sources, Range targets, Range destinations, Options options)
         {
@@ -92,6 +92,7 @@ namespace CellDiff
             var update_index_delta = length / UPDATE_INDEX_DIVIDER;
             var next_update_index = 0;
             var next_update_time = DateTime.Now;
+
             for (int i = 1; i <= length; i++)
             {
                 if (i > next_update_index || DateTime.Now > next_update_time)
