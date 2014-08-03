@@ -88,6 +88,12 @@ namespace CellDiff
             var tgt = targets.Cells;
             var dst = (destinations == null) ? null : destinations.Cells;
 
+            if (dst != null)
+            {
+                dst.Clear();
+                dst.NumberFormat = "@";
+            }
+
             var length = src.Count;
             var update_index_delta = length / UPDATE_INDEX_DIVIDER;
             var next_update_index = 0;
@@ -126,8 +132,8 @@ namespace CellDiff
             var tgt_text = tgt.Text.ToString();
             var diff = Differ.Compare(src_text.ToCharArray(), tgt_text.ToCharArray()).Runs();
 
-            src.Value2 = src_text;
-            tgt.Value2 = tgt_text;
+            src.NumberFormat = "@";  src.Value2 = src_text;
+            tgt.NumberFormat = "@";  tgt.Value2 = tgt_text;
 
             int i = 1, j = 1;
             foreach (var t in diff)
