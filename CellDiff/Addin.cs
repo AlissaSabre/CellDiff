@@ -112,7 +112,9 @@ namespace CellDiff
                                     tgt = Application.Range(AdvancedOptions.Targets),
                                     dst = AdvancedOptions.SeparateDestinateions ? Application.Range(AdvancedOptions.Destinations) : null)
                                 {
-                                    CompareRanges(src, tgt, dst, new Options() { Src = AdvancedOptions.SourceDecoration, Tgt = AdvancedOptions.TargetDecoration });
+                                    CompareRanges(src.Cells, tgt.Cells, dst.Cells,
+                                        new Options() { Src = AdvancedOptions.SourceDecoration, 
+                                                        Tgt = AdvancedOptions.TargetDecoration });
                                 }
                             }
                         }
