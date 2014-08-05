@@ -108,11 +108,11 @@ namespace CellDiff
                             {
                                 AdvancedOptions = dlg.Options;
                                 using (Range
-                                    src = Application.Range(AdvancedOptions.Sources),
-                                    tgt = Application.Range(AdvancedOptions.Targets),
-                                    dst = AdvancedOptions.SeparateDestinateions ? Application.Range(AdvancedOptions.Destinations) : null)
+                                    src = Application.Range(AdvancedOptions.Sources).Cells,
+                                    tgt = Application.Range(AdvancedOptions.Targets).Cells,
+                                    dst = AdvancedOptions.SeparateDestinateions ? Application.Range(AdvancedOptions.Destinations).Cells : null)
                                 {
-                                    CompareRanges(src.Cells, tgt.Cells, dst.Cells,
+                                    CompareRanges(src, tgt, dst,
                                         new Options() { Src = AdvancedOptions.SourceDecoration, 
                                                         Tgt = AdvancedOptions.TargetDecoration });
                                 }
