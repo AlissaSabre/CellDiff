@@ -28,7 +28,7 @@ namespace CellDiff
         /// </summary>
         private bool PreferVertical = false;
 
-        Range[] FindCompareRanges(Range selection)
+        Range[] FindCompareRanges(Range selection, bool generous)
         {
             switch (selection.Areas.Count)
             {
@@ -48,7 +48,7 @@ namespace CellDiff
                     }
                     else
                     {
-                        Error("WRONG SELECTION");
+                        if (!generous) Error("WRONG SELECTION");
                         return null;
                     }
 
@@ -66,12 +66,12 @@ namespace CellDiff
                     }
                     else
                     {
-                        Error("WRONG SELECTION");
+                        if (!generous) Error("WRONG SELECTION");
                         return null;
                     }
 
                 default:
-                    Error("WRONG SELECTION");
+                    if (!generous) Error("WRONG SELECTION");
                     return null;
             }
         }

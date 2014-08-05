@@ -86,9 +86,9 @@ namespace CellDiff
                     case "compareCellsButton":
                         using (var selection = Application.Selection as IDisposable)
                         {
-                            if (selection is Range)
+                            if (selection != null && selection is Range)
                             {
-                                var ranges = FindCompareRanges(selection as Range);
+                                var ranges = FindCompareRanges(selection as Range, false);
                                 if (ranges != null)
                                 {
                                     CompareRanges(ranges[0], ranges[1], null, QUICK_OPTIONS);
@@ -101,14 +101,19 @@ namespace CellDiff
                         }
                         break;
                     case "dialogLauncher":
-                        DialogResult result;
                         using (var dlg = new Advanced())
                         {
                             dlg.Options = AdvancedOptions;
-                            result = dlg.ShowDialog();
-                            if (result == DialogResult.OK)
+                            if (DialogResult.OK == dlg.ShowDialog())
                             {
                                 AdvancedOptions = dlg.Options;
+                                using (Range
+                                    src = Application.Range(AdvancedOptions.Sources),
+                                    tgt = Application.Range(AdvancedOptions.Targets),
+                                    dst = AdvancedOptions.SeparateDestinateions ? Application.Range(AdvancedOptions.Destinations) : null)
+                                {
+                                    CompareRanges(src, tgt, dst, new Options() { Src = AdvancedOptions.SourceDecoration, Tgt = AdvancedOptions.TargetDecoration });
+                                }
                             }
                         }
 
