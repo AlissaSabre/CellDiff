@@ -88,7 +88,11 @@ namespace CellDiff
                         {
                             if (selection is Range)
                             {
-                                QuickCompare(selection as Range, QUICK_OPTIONS);
+                                var ranges = FindCompareRanges(selection as Range);
+                                if (ranges != null)
+                                {
+                                    CompareRanges(ranges[0], ranges[1], null, QUICK_OPTIONS);
+                                }
                             }
                             else
                             {

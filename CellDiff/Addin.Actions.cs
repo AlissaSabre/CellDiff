@@ -26,9 +26,9 @@ namespace CellDiff
         /// <summary>
         /// A sort of a tiebreaker for a quick compare 
         /// </summary>
-        private static bool PreferVertical = false;
+        private bool PreferVertical = false;
 
-        void QuickCompare(Range selection, Options options)
+        Range[] FindCompareRanges(Range selection)
         {
             switch (selection.Areas.Count)
             {
@@ -38,20 +38,19 @@ namespace CellDiff
                     {
                         // Go vertical
                         PreferVertical = true;
-                        CompareRanges(area.Columns[1], area.Columns[2], null, options);
+                        return new[] { area.Columns[1].Cells, area.Columns[2].Cells };
                     }
                     else if (area.Rows.Count == 2)
                     {
                         // GO horizontal
                         PreferVertical = false;
-                        CompareRanges(area.Rows[1], area.Rows[2], null, options);
+                        return new [] { area.Rows[1].Cells, area.Rows[2].Cells };
                     }
                     else
                     {
                         Error("WRONG SELECTION");
-                        return;
+                        return null;
                     }
-                    break;
 
                 case 2:
                     var area1 = selection.Areas[1];
@@ -63,18 +62,17 @@ namespace CellDiff
                         a1r == 1 && a2c == 1 && a1c == a2r ||
                         a1r == 1 && a2r == 1 && a1c == a2c)
                     {
-                        CompareRanges(area1, area2, null, options);
+                        return new[] { area1.Cells, area2.Cells };
                     }
                     else
                     {
                         Error("WRONG SELECTION");
-                        return;
+                        return null;
                     }
-                    break;
 
                 default:
                     Error("WRONG SELECTION");
-                    return;
+                    return null;
             }
         }
 
@@ -82,7 +80,7 @@ namespace CellDiff
 
         private const int UPDATE_INDEX_DIVIDER = 20;
 
-        private void CompareRanges(Range sources, Range targets, Range destinations, Options options)
+        void CompareRanges(Range sources, Range targets, Range destinations, Options options)
         {
             var src = sources.Cells;
             var tgt = targets.Cells;
