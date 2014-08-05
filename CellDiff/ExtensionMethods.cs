@@ -47,6 +47,5 @@ namespace CellDiff
                 yield return Tuple.Create(last, run);
             }
         }
-
     }
 }
