@@ -62,7 +62,7 @@ namespace CellDiff
         }
 
         private static readonly Decoration DEFAULT_SOURCE_DECORATION = new Decoration() { Strikeout = true, Bold = true, Color = Color.Maroon };
-        private static readonly Decoration DEFAULT_TARGET_DECORATION = new Decoration() { Underline = true, Bold = true, Color = Color.Navy }; 
+        private static readonly Decoration DEFAULT_TARGET_DECORATION = new Decoration() { Underline = true, Bold = true, Color = Color.Green }; 
 
         private static readonly Options QUICK_OPTIONS = new Options()
         {
