@@ -8,8 +8,8 @@ An Excel plug-in to compare (diff) cell contents. Written in C# with NetOffice.
 This program will eventually be a Microsoft Office Excel add-in.
 It will provide some functionality to compare cell contents (like diff command) on a worksheet interactively.
 
-It is just started recently and under a heavy yet slow development.
-Source files even committed to the master branch may not be compile for the moment.
+Source files in master branch should compile and work in some way.
+Other branches may hold set of source files that cause compile errors.
 
 ## Status
 
@@ -18,7 +18,7 @@ Source files even committed to the master branch may not be compile for the mome
 ## Target environment
 
 * Modern Windows (Windows 7, 8 or later.  Vista may be included.) 
-* .Net 4.0 (Client Profile)
+* .Net Framework 4.0 (Client Profile)
 * Microsoft Office Excel 2007, 2010, or 2013.
 * English and Japanese UI.
 
@@ -26,6 +26,4 @@ Source files even committed to the master branch may not be compile for the mome
 
 * Visual Studio Express 2012/2013 (C#)
 * [NetOffice] (http://netoffice.codeplex.com/) 1.6.0
-
-
 
