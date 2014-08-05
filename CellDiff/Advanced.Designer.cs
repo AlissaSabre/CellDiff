@@ -39,25 +39,25 @@
             this.separateDestination = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.sourceColorBox = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.sourceBold = new System.Windows.Forms.CheckBox();
             this.sourceStrikeout = new System.Windows.Forms.CheckBox();
             this.sourceUnderline = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.targetColorBox = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.targetBold = new System.Windows.Forms.CheckBox();
             this.targetStrikeout = new System.Windows.Forms.CheckBox();
             this.targetUnderline = new System.Windows.Forms.CheckBox();
             this.ok = new System.Windows.Forms.Button();
             this.cancel = new System.Windows.Forms.Button();
-            this.sourceColorBox = new System.Windows.Forms.PictureBox();
-            this.targetColorBox = new System.Windows.Forms.PictureBox();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sourceColorBox)).BeginInit();
+            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.targetColorBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,6 +134,14 @@
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
+            // sourceColorBox
+            // 
+            this.sourceColorBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.sourceColorBox, "sourceColorBox");
+            this.sourceColorBox.Name = "sourceColorBox";
+            this.sourceColorBox.TabStop = false;
+            this.sourceColorBox.Click += new System.EventHandler(this.colorPictureBox_Click);
+            // 
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
@@ -167,6 +175,14 @@
             resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
+            // 
+            // targetColorBox
+            // 
+            this.targetColorBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.targetColorBox, "targetColorBox");
+            this.targetColorBox.Name = "targetColorBox";
+            this.targetColorBox.TabStop = false;
+            this.targetColorBox.Click += new System.EventHandler(this.colorPictureBox_Click);
             // 
             // label4
             // 
@@ -206,22 +222,6 @@
             this.cancel.Name = "cancel";
             this.cancel.UseVisualStyleBackColor = true;
             // 
-            // sourceColorBox
-            // 
-            this.sourceColorBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.sourceColorBox, "sourceColorBox");
-            this.sourceColorBox.Name = "sourceColorBox";
-            this.sourceColorBox.TabStop = false;
-            this.sourceColorBox.Click += new System.EventHandler(this.sourceColorBox_Click);
-            // 
-            // targetColorBox
-            // 
-            this.targetColorBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.targetColorBox, "targetColorBox");
-            this.targetColorBox.Name = "targetColorBox";
-            this.targetColorBox.TabStop = false;
-            this.targetColorBox.Click += new System.EventHandler(this.targetColorBox_Click);
-            // 
             // colorDialog
             // 
             this.colorDialog.AnyColor = true;
@@ -250,9 +250,9 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sourceColorBox)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sourceColorBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.targetColorBox)).EndInit();
             this.ResumeLayout(false);
 

@@ -88,21 +88,13 @@ namespace CellDiff
             }
         }
 
-        private void sourceColorBox_Click(object sender, EventArgs e)
+        private void colorPictureBox_Click(object sender, EventArgs e)
         {
-            colorDialog.Color = sourceColorBox.BackColor;
+            var pictureBox = sender as PictureBox;
+            colorDialog.Color = pictureBox.BackColor;
             if (DialogResult.OK == colorDialog.ShowDialog(this))
             {
-                sourceColorBox.BackColor = colorDialog.Color;
-            }
-        }
-
-        private void targetColorBox_Click(object sender, EventArgs e)
-        {
-            colorDialog.Color = targetColorBox.BackColor;
-            if (DialogResult.OK == colorDialog.ShowDialog(this))
-            {
-                targetColorBox.BackColor = colorDialog.Color;
+                pictureBox.BackColor = colorDialog.Color;
             }
         }
     }
