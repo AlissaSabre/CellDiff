@@ -51,9 +51,7 @@
             this.ok = new System.Windows.Forms.Button();
             this.cancel = new System.Windows.Forms.Button();
             this.sourceColorBox = new System.Windows.Forms.PictureBox();
-            this.sourceColorButton = new System.Windows.Forms.Button();
             this.targetColorBox = new System.Windows.Forms.PictureBox();
-            this.targetColorButton = new System.Windows.Forms.Button();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -128,7 +126,6 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.sourceColorBox);
-            this.groupBox3.Controls.Add(this.sourceColorButton);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.sourceBold);
             this.groupBox3.Controls.Add(this.sourceStrikeout);
@@ -162,7 +159,6 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.targetColorButton);
             this.groupBox4.Controls.Add(this.targetColorBox);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.targetBold);
@@ -216,13 +212,7 @@
             resources.ApplyResources(this.sourceColorBox, "sourceColorBox");
             this.sourceColorBox.Name = "sourceColorBox";
             this.sourceColorBox.TabStop = false;
-            // 
-            // sourceColorButton
-            // 
-            resources.ApplyResources(this.sourceColorButton, "sourceColorButton");
-            this.sourceColorButton.Name = "sourceColorButton";
-            this.sourceColorButton.UseVisualStyleBackColor = true;
-            this.sourceColorButton.Click += new System.EventHandler(this.sourceColorButton_Click);
+            this.sourceColorBox.Click += new System.EventHandler(this.sourceColorBox_Click);
             // 
             // targetColorBox
             // 
@@ -230,13 +220,7 @@
             resources.ApplyResources(this.targetColorBox, "targetColorBox");
             this.targetColorBox.Name = "targetColorBox";
             this.targetColorBox.TabStop = false;
-            // 
-            // targetColorButton
-            // 
-            resources.ApplyResources(this.targetColorButton, "targetColorButton");
-            this.targetColorButton.Name = "targetColorButton";
-            this.targetColorButton.UseVisualStyleBackColor = true;
-            this.targetColorButton.Click += new System.EventHandler(this.targetColorButton_Click);
+            this.targetColorBox.Click += new System.EventHandler(this.targetColorBox_Click);
             // 
             // colorDialog
             // 
@@ -298,8 +282,6 @@
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.Button cancel;
         private System.Windows.Forms.PictureBox sourceColorBox;
-        private System.Windows.Forms.Button sourceColorButton;
-        private System.Windows.Forms.Button targetColorButton;
         private System.Windows.Forms.PictureBox targetColorBox;
         private System.Windows.Forms.ColorDialog colorDialog;
     }

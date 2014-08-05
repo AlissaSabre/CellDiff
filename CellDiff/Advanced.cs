@@ -88,7 +88,7 @@ namespace CellDiff
             }
         }
 
-        private void sourceColorButton_Click(object sender, EventArgs e)
+        private void sourceColorBox_Click(object sender, EventArgs e)
         {
             colorDialog.Color = sourceColorBox.BackColor;
             if (DialogResult.OK == colorDialog.ShowDialog(this))
@@ -97,7 +97,7 @@ namespace CellDiff
             }
         }
 
-        private void targetColorButton_Click(object sender, EventArgs e)
+        private void targetColorBox_Click(object sender, EventArgs e)
         {
             colorDialog.Color = targetColorBox.BackColor;
             if (DialogResult.OK == colorDialog.ShowDialog(this))
