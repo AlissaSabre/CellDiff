@@ -84,41 +84,10 @@ namespace CellDiff
                 switch (control.Id)
                 {
                     case "compareCellsButton":
-                        using (var selection = Application.Selection as IDisposable)
-                        {
-                            if (selection != null && selection is Range)
-                            {
-                                var ranges = FindCompareRanges(selection as Range, false);
-                                if (ranges != null)
-                                {
-                                    CompareRanges(ranges[0], ranges[1], null, QUICK_OPTIONS);
-                                }
-                            }
-                            else
-                            {
-                                Error("Please select cells to compare.");
-                            }
-                        }
+                        QuickCompare();
                         break;
                     case "dialogLauncher":
-                        using (var dlg = new Advanced())
-                        {
-                            dlg.Options = AdvancedOptions;
-                            if (DialogResult.OK == dlg.ShowDialog())
-                            {
-                                AdvancedOptions = dlg.Options;
-                                using (Range
-                                    src = Application.Range(AdvancedOptions.Sources).Cells,
-                                    tgt = Application.Range(AdvancedOptions.Targets).Cells,
-                                    dst = AdvancedOptions.SeparateDestinateions ? Application.Range(AdvancedOptions.Destinations).Cells : null)
-                                {
-                                    CompareRanges(src, tgt, dst,
-                                        new Options() { Src = AdvancedOptions.SourceDecoration, 
-                                                        Tgt = AdvancedOptions.TargetDecoration });
-                                }
-                            }
-                        }
-
+                        AdvancedCompare();
                         break;
                     default:
                         MessageBox.Show("Unkown Control Id: " + control.Id);
@@ -138,6 +107,9 @@ namespace CellDiff
                 // Never leave the status bar in our own.
                 Application.StatusBar = false;
                 Application.ScreenUpdating = true;
+
+                // Ensure reclaiming all temporary COM objects.
+                Application.DisposeChildInstances();
             }
         }
 

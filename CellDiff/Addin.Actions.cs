@@ -23,6 +23,43 @@ namespace CellDiff
             public Decoration Tgt;
         }
 
+        public void QuickCompare()
+        {
+            var selection = Application.Selection as Range;
+            if (selection != null)
+            {
+                var ranges = FindCompareRanges(selection as Range, false);
+                if (ranges != null)
+                {
+                    CompareRanges(ranges[0], ranges[1], null, QUICK_OPTIONS);
+                }
+            }
+            else
+            {
+                Error("Please select cells to compare.");
+            }
+        }
+
+        public void AdvancedCompare()
+        {
+            using (var dlg = new Advanced())
+            {
+                dlg.Options = AdvancedOptions;
+                if (DialogResult.OK != dlg.ShowDialog()) return;
+                AdvancedOptions = dlg.Options;
+            }
+
+            var src = Application.Range(AdvancedOptions.Sources).Cells;
+            var tgt = Application.Range(AdvancedOptions.Targets).Cells;
+            var dst = AdvancedOptions.SeparateDestinateions ? Application.Range(AdvancedOptions.Destinations).Cells : null;
+            CompareRanges(src, tgt, dst,
+                new Options()
+                {
+                    Src = AdvancedOptions.SourceDecoration,
+                    Tgt = AdvancedOptions.TargetDecoration
+                });
+        }
+
         /// <summary>
         /// A sort of a tiebreaker for a quick compare 
         /// </summary>
