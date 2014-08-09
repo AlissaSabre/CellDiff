@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Windows.Forms;
 
@@ -29,17 +30,16 @@ namespace CellDiff
         public void QuickCompare()
         {
             var selection = Application.Selection as Range;
-            if (selection != null)
+            if (selection == null)
             {
-                var ranges = FindCompareRanges(selection as Range, false);
-                if (ranges != null)
-                {
-                    CompareRanges(ranges[0], ranges[1], null, QUICK_OPTIONS);
-                }
+                Error(Messages.ERROR_Selection_was_not_a_Range);
+                return;
             }
-            else
+
+            var ranges = FindCompareRanges(selection as Range, false);
+            if (ranges != null)
             {
-                Error("Please select cells to compare.");
+                CompareRanges(ranges[0], ranges[1], null, QUICK_OPTIONS);
             }
         }
 
@@ -241,9 +241,9 @@ namespace CellDiff
             }
         }
 
-        internal void Error(string s)
+        internal void Error(string message, params object[] args)
         {
-            MessageBox.Show(s);
+            MessageBox.Show(string.Format(message, args));
         }
     }
 }
