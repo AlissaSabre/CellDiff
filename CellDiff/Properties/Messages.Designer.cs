@@ -61,11 +61,65 @@ namespace CellDiff.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Two sellected areas contain different number of cells.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two..
+        /// </summary>
+        internal static string ERROR_Areas_have_different_sizes {
+            get {
+                return ResourceManager.GetString("ERROR_Areas_have_different_sizes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Three or more separate areas are selected.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two..
+        /// </summary>
+        internal static string ERROR_Invalid_selected_areas {
+            get {
+                return ResourceManager.GetString("ERROR_Invalid_selected_areas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selection is ambiguous to compre.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two..
+        /// </summary>
+        internal static string ERROR_Invalid_selected_range {
+            get {
+                return ResourceManager.GetString("ERROR_Invalid_selected_range", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected cells contain one or more merged cells.  Use Compare with Advanced Options to compare texts in merged cells..
+        /// </summary>
+        internal static string ERROR_MergedCells {
+            get {
+                return ResourceManager.GetString("ERROR_MergedCells", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multiple cells are required to compare.  Try selecting two or more cells..
+        /// </summary>
+        internal static string ERROR_One_cell {
+            get {
+                return ResourceManager.GetString("ERROR_One_cell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No cells are currently selected.  Try selecting cells that contain texts to compare..
         /// </summary>
         internal static string ERROR_Selection_was_not_a_Range {
             get {
                 return ResourceManager.GetString("ERROR_Selection_was_not_a_Range", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compare.
+        /// </summary>
+        internal static string ErrorCaption {
+            get {
+                return ResourceManager.GetString("ErrorCaption", resourceCulture);
             }
         }
     }

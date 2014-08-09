@@ -117,6 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorCaption" xml:space="preserve">
+    <value>Compare</value>
+    <comment>Caption of the MessageBox for error messages from CellDiff.</comment>
+  </data>
+  <data name="ERROR_Areas_have_different_sizes" xml:space="preserve">
+    <value>Two sellected areas contain different number of cells.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two.</value>
+    <comment>Quick Compare is clicked when two areas are selected but their sizes are different.</comment>
+  </data>
+  <data name="ERROR_Invalid_selected_areas" xml:space="preserve">
+    <value>Three or more separate areas are selected.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two.</value>
+    <comment>Quick Compare is clicked when three or more areas are selected.</comment>
+  </data>
+  <data name="ERROR_Invalid_selected_range" xml:space="preserve">
+    <value>Selection is ambiguous to compre.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two.</value>
+    <comment>Quick Compare is clicked when a contiguous rectangular area neither of whose width nor height is 2.</comment>
+  </data>
+  <data name="ERROR_MergedCells" xml:space="preserve">
+    <value>Selected cells contain one or more merged cells.  Use Compare with Advanced Options to compare texts in merged cells.</value>
+    <comment>Quick Compare is clicked when one or more merged cells are included in the selection.</comment>
+  </data>
+  <data name="ERROR_One_cell" xml:space="preserve">
+    <value>Multiple cells are required to compare.  Try selecting two or more cells.</value>
+    <comment>Quick Compare is clicked when only one cell is selected.</comment>
+  </data>
   <data name="ERROR_Selection_was_not_a_Range" xml:space="preserve">
     <value>No cells are currently selected.  Try selecting cells that contain texts to compare.</value>
     <comment>Quick Compare is clicked when an object other than cell range is selected.</comment>

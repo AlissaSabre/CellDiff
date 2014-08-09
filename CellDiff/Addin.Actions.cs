@@ -73,6 +73,17 @@ namespace CellDiff
 
         Range[] FindCompareRanges(Range selection, bool generous)
         {
+            if (true.Equals(selection.MergeCells))
+            {
+                if (!generous) Error(Messages.ERROR_MergedCells);
+                return null;
+            }
+            if (selection.Cells.Count < 2)
+            {
+                if (!generous) Error(Messages.ERROR_One_cell);
+                return null;
+            }
+
             switch (selection.Areas.Count)
             {
                 case 1:
@@ -91,7 +102,7 @@ namespace CellDiff
                     }
                     else
                     {
-                        if (!generous) Error("WRONG SELECTION");
+                        if (!generous) Error(Messages.ERROR_Invalid_selected_range);
                         return null;
                     }
 
@@ -109,12 +120,12 @@ namespace CellDiff
                     }
                     else
                     {
-                        if (!generous) Error("WRONG SELECTION");
+                        if (!generous) Error(Messages.ERROR_Areas_have_different_sizes);
                         return null;
                     }
 
                 default:
-                    if (!generous) Error("WRONG SELECTION");
+                    if (!generous) Error(Messages.ERROR_Invalid_selected_areas);
                     return null;
             }
         }
@@ -243,7 +254,7 @@ namespace CellDiff
 
         internal void Error(string message, params object[] args)
         {
-            MessageBox.Show(string.Format(message, args));
+            MessageBox.Show(string.Format(message, args), Messages.ErrorCaption);
         }
     }
 }
