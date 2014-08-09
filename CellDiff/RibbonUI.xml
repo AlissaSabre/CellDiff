@@ -4,9 +4,9 @@
     <tabs>
       <tab idMso="TabReview">
         <group id="group1" label="Comparison">
-          <button id="compareCellsButton" label="Compare Cell Contents" imageMso="ReviewCompareTwoVersions" size="large" onAction="OnAction" />
+          <button id="quickCompare" label="Compare Cell Contents" imageMso="ReviewCompareTwoVersions" size="large" onAction="OnAction" />
           <dialogBoxLauncher>
-            <button id="dialogLauncher" screentip="Advanced Compare Options" onAction="OnAction" />
+            <button id="advancedCompare" screentip="Compare with Advanced Options" onAction="OnAction" />
           </dialogBoxLauncher>
         </group>
       </tab>

@@ -23,6 +23,9 @@ namespace CellDiff
             public Decoration Tgt;
         }
 
+        /// <summary>
+        /// Compare Cells in Selection using the default set of options.
+        /// </summary>
         public void QuickCompare()
         {
             var selection = Application.Selection as Range;
@@ -40,6 +43,9 @@ namespace CellDiff
             }
         }
 
+        /// <summary>
+        /// Compare cells through an AdvancedOptions dialog.
+        /// </summary>
         public void AdvancedCompare()
         {
             using (var dlg = new Advanced())
@@ -117,7 +123,14 @@ namespace CellDiff
 
         private const int UPDATE_INDEX_DIVIDER = 20;
 
-        void CompareRanges(Range sources, Range targets, Range destinations, Options options)
+        /// <summary>
+        /// Compare cells.
+        /// </summary>
+        /// <param name="sources">The source cells.</param>
+        /// <param name="targets">The target cells.</param>
+        /// <param name="destinations">The cells to store the results; or null if the results are to overwrite source and target cells.</param>
+        /// <param name="options">The options for results.</param>
+        public void CompareRanges(Range sources, Range targets, Range destinations, Options options)
         {
             var src = sources.Cells;
             var tgt = targets.Cells;
@@ -228,7 +241,7 @@ namespace CellDiff
             }
         }
 
-        void Error(string s)
+        internal void Error(string s)
         {
             MessageBox.Show(s);
         }

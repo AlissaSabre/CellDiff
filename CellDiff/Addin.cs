@@ -23,38 +23,48 @@ using CellDiff.Properties;
 
 namespace CellDiff
 {
-    [COMAddin("CellDiff","Detect differences of texts in worksheet cells",3)]
-    //[CustomUI("CellDiff.RibbonUI.xml")]
+    /// <summary>
+    /// Main class of CellDiff Addin.
+    /// </summary>
+    [COMAddin("CellDiff", "Excel add-in to compare cell contents", 3)]
     [GuidAttribute("3DF43D38-7D7E-4B28-A5D9-CF795FF10A32"), ProgId("CellDiff.Addin")]
     public partial class Addin : COMAddin
     {
+        /// <summary>
+        /// Creates an instance of Addin.
+        /// </summary>
         public Addin()
         {
             //this.OnStartupComplete += new OnStartupCompleteEventHandler(Addin_OnStartupComplete);
-            this.OnConnection += new OnConnectionEventHandler(Addin_OnConnection);
+            //this.OnConnection += new OnConnectionEventHandler(Addin_OnConnection);
             //this.OnDisconnection += new OnDisconnectionEventHandler(Addin_OnDisconnection);
         }
 
         #region IDTExtensibility2 Members
 
-        void Addin_OnConnection(object Application, NetOffice.Tools.ext_ConnectMode ConnectMode, object AddInInst, ref Array custom)
-        {
-        }
+        //void Addin_OnConnection(object Application, NetOffice.Tools.ext_ConnectMode ConnectMode, object AddInInst, ref Array custom)
+        //{
+        //}
 
-        void Addin_OnStartupComplete(ref Array custom)
-        {
+        //void Addin_OnStartupComplete(ref Array custom)
+        //{
 
-        }
+        //}
 
-        void Addin_OnDisconnection(NetOffice.Tools.ext_DisconnectMode RemoveMode, ref Array custom)
-        {
+        //void Addin_OnDisconnection(NetOffice.Tools.ext_DisconnectMode RemoveMode, ref Array custom)
+        //{
            
-        }
+        //}
 
         #endregion		
 
 		#region IRibbonExtensibility Members
 
+        /// <summary>
+        /// Implements <see cref="IRibbonExtensibility"/>.
+        /// </summary>
+        /// <param name="RibbonID">Ignored.</param>
+        /// <returns>An XML instance to define RibbonUI elements of this Addin.</returns>
         public override string GetCustomUI(string RibbonID)
         {
             SyncUICulture();
@@ -76,6 +86,10 @@ namespace CellDiff
             TargetDecoration = DEFAULT_TARGET_DECORATION
         };
 
+        /// <summary>
+        /// Called back by Ribbon controls.
+        /// </summary>
+        /// <param name="control">The control that caused the callback.</param>
         public void OnAction(IRibbonControl control)
         {
             Application.ScreenUpdating = false;
@@ -83,10 +97,10 @@ namespace CellDiff
             {
                 switch (control.Id)
                 {
-                    case "compareCellsButton":
+                    case "quickCompare":
                         QuickCompare();
                         break;
-                    case "dialogLauncher":
+                    case "advancedCompare":
                         AdvancedCompare();
                         break;
                     default:
@@ -115,8 +129,14 @@ namespace CellDiff
 
         #endregion
 
-        private void SyncUICulture()
+        /// <summary>
+        /// Synchronizes the UI culture of the current thread with the Excel's.
+        /// </summary>
+        internal void SyncUICulture()
         {
+            // The following code is from http://msdn.microsoft.com/en-us/library/vstudio/w9x4hz7x(v=vs.100).aspx
+            // For whatever reason, it doesn't work well on my PC, so it is disabled.
+
             //using (var languageSettings = Application.LanguageSettings)
             //{
             //    Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageSettings.LanguageID(MsoAppLanguageID.msoLanguageIDUI));
