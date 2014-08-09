@@ -80,7 +80,7 @@ namespace CellDiff
             Tgt = DEFAULT_TARGET_DECORATION
         };
 
-        private Advanced.OptionValues AdvancedOptions = new Advanced.OptionValues()
+        private AdvancedDialog.OptionValues AdvancedOptions = new AdvancedDialog.OptionValues()
         {
             SourceDecoration = DEFAULT_SOURCE_DECORATION,
             TargetDecoration = DEFAULT_TARGET_DECORATION

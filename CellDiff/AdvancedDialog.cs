@@ -9,7 +9,10 @@ using System.Windows.Forms;
 
 namespace CellDiff
 {
-    public partial class Advanced : Form
+    /// <summary>
+    /// Dialog box to receive advanced options.
+    /// </summary>
+    public partial class AdvancedDialog : Form
     {
         public struct OptionValues
         {
@@ -33,7 +36,7 @@ namespace CellDiff
 
         public event ValidateOptionsEvent ValidateOptions;
 
-        public Advanced()
+        public AdvancedDialog()
         {
             InitializeComponent();
         }

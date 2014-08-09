@@ -67,11 +67,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Addin.cs" />
-    <Compile Include="Advanced.cs">
+    <Compile Include="AdvancedDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Advanced.Designer.cs">
-      <DependentUpon>Advanced.cs</DependentUpon>
+    <Compile Include="AdvancedDialog.Designer.cs">
+      <DependentUpon>AdvancedDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Decoration.cs" />
     <Compile Include="DifferBase.cs" />
@@ -93,11 +93,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Advanced.ja.resx">
-      <DependentUpon>Advanced.cs</DependentUpon>
+    <EmbeddedResource Include="AdvancedDialog.ja.resx">
+      <DependentUpon>AdvancedDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Advanced.resx">
-      <DependentUpon>Advanced.cs</DependentUpon>
+    <EmbeddedResource Include="AdvancedDialog.resx">
+      <DependentUpon>AdvancedDialog.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="RibbonUI.xml" />
     <EmbeddedResource Include="ExceptionDialog.resx">

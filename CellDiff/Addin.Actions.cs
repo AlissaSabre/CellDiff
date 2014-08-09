@@ -48,7 +48,7 @@ namespace CellDiff
         /// </summary>
         public void AdvancedCompare()
         {
-            using (var dlg = new Advanced())
+            using (var dlg = new AdvancedDialog())
             {
                 dlg.Options = AdvancedOptions;
                 if (DialogResult.OK != dlg.ShowDialog()) return;
