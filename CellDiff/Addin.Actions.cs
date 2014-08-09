@@ -73,7 +73,9 @@ namespace CellDiff
 
         Range[] FindCompareRanges(Range selection, bool generous)
         {
-            if (true.Equals(selection.MergeCells))
+            // Range.MergeCells can be one of three values; true, false, 
+            // and a Variant value Null which is mapped to DBNull.Value in .NET.
+            if (!false.Equals(selection.MergeCells))
             {
                 if (!generous) Error(Messages.ERROR_MergedCells);
                 return null;

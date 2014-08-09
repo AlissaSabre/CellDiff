@@ -130,7 +130,7 @@
     <comment>Quick Compare is clicked when three or more areas are selected.</comment>
   </data>
   <data name="ERROR_Invalid_selected_range" xml:space="preserve">
-    <value>Selection is ambiguous to compre.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two.</value>
+    <value>Dimension of selected cells is unsuitable to compre.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two.</value>
     <comment>Quick Compare is clicked when a contiguous rectangular area neither of whose width nor height is 2.</comment>
   </data>
   <data name="ERROR_MergedCells" xml:space="preserve">
@@ -138,7 +138,7 @@
     <comment>Quick Compare is clicked when one or more merged cells are included in the selection.</comment>
   </data>
   <data name="ERROR_One_cell" xml:space="preserve">
-    <value>Multiple cells are required to compare.  Try selecting two or more cells.</value>
+    <value>Comparison requires multiple cells.  Try selecting two (or more) cells.</value>
     <comment>Quick Compare is clicked when only one cell is selected.</comment>
   </data>
   <data name="ERROR_Selection_was_not_a_Range" xml:space="preserve">

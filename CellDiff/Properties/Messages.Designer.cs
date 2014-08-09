@@ -79,7 +79,7 @@ namespace CellDiff.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selection is ambiguous to compre.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two..
+        ///   Looks up a localized string similar to Dimension of selected cells is unsuitable to compre.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two..
         /// </summary>
         internal static string ERROR_Invalid_selected_range {
             get {
@@ -97,7 +97,7 @@ namespace CellDiff.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Multiple cells are required to compare.  Try selecting two or more cells..
+        ///   Looks up a localized string similar to Comparison requires multiple cells.  Try selecting two (or more) cells..
         /// </summary>
         internal static string ERROR_One_cell {
             get {
