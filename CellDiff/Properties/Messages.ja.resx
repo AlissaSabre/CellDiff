@@ -120,7 +120,22 @@
   <data name="ErrorCaption" xml:space="preserve">
     <value>比較</value>
   </data>
+  <data name="ERROR_Areas_have_different_sizes" xml:space="preserve">
+    <value>選択した2つの領域に含まれるセルの個数が異なります。同じ大きさの領域を2つ選択するか、幅（列の数）または高さ（行の数）が2であるような繋がった領域を1つ選択し、再度実行してください。</value>
+  </data>
+  <data name="ERROR_Invalid_selected_areas" xml:space="preserve">
+    <value>繋がっていない領域が3つ以上選択されています。同じ大きさの領域を2つ選択するか、幅（列の数）または高さ（行の数）が2であるような繋がった領域を1つ選択し、再度実行してください。</value>
+  </data>
+  <data name="ERROR_Invalid_selected_range" xml:space="preserve">
+    <value>選択された領域の大きさでは比較できません。同じ大きさの領域を2つ選択するか、幅（列の数）または高さ（行の数）が2であるような繋がった領域を1つ選択し、再度実行してください。</value>
+  </data>
+  <data name="ERROR_MergedCells" xml:space="preserve">
+    <value>選択されたセルには結合セルが含まれています。結合セル中のテキストを比較するには、[高度なオプションにより比較]を用います。</value>
+  </data>
+  <data name="ERROR_One_cell" xml:space="preserve">
+    <value>比較には複数のセルが必要です。2つ以上のセルを選択し、再度実行してください。</value>
+  </data>
   <data name="ERROR_Selection_was_not_a_Range" xml:space="preserve">
-    <value>セルが選択されていません。比較したいテキストを含んだセルを選択して、再度実行してください。</value>
+    <value>セルが選択されていません。比較したいテキストを含むセルを選択して、再度実行してください。</value>
   </data>
 </root>

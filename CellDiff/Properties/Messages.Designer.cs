@@ -79,7 +79,7 @@ namespace CellDiff.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dimension of selected cells is unsuitable to compre.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two..
+        ///   Looks up a localized string similar to Size of selected area is unsuitable to compare.  Try selecting two areas of same size, or one contiguous area whose width (number of columns) or height (number of rows) is two..
         /// </summary>
         internal static string ERROR_Invalid_selected_range {
             get {
@@ -88,7 +88,7 @@ namespace CellDiff.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selected cells contain one or more merged cells.  Use Compare with Advanced Options to compare texts in merged cells..
+        ///   Looks up a localized string similar to Selected cells contain one or more merged cells.  To compare texts in merged cells, use Compare with Advanced Options..
         /// </summary>
         internal static string ERROR_MergedCells {
             get {
@@ -106,7 +106,7 @@ namespace CellDiff.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No cells are currently selected.  Try selecting cells that contain texts to compare..
+        ///   Looks up a localized string similar to No cells are selected.  Try selecting cells that contain texts you want to compare..
         /// </summary>
         internal static string ERROR_Selection_was_not_a_Range {
             get {
