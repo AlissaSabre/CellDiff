@@ -38,6 +38,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RegisterForComInterop>false</RegisterForComInterop>
+    <DocumentationFile>
+    </DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Excel, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -64,11 +67,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Addin.cs" />
-    <Compile Include="Advanced.cs">
+    <Compile Include="AdvancedDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Advanced.Designer.cs">
-      <DependentUpon>Advanced.cs</DependentUpon>
+    <Compile Include="AdvancedDialog.Designer.cs">
+      <DependentUpon>AdvancedDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Decoration.cs" />
     <Compile Include="DifferBase.cs" />
@@ -82,6 +85,11 @@
     <Compile Include="GreedyDiffer.cs" />
     <Compile Include="IDiffer.cs" />
     <Compile Include="Addin.Actions.cs" />
+    <Compile Include="Properties\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -90,15 +98,37 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Advanced.ja.resx">
-      <DependentUpon>Advanced.cs</DependentUpon>
+    <Content Include="Images\advancedoptions.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dialoglauncher.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ribbon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Readme.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\screenshot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="AdvancedDialog.ja.resx">
+      <DependentUpon>AdvancedDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Advanced.resx">
-      <DependentUpon>Advanced.cs</DependentUpon>
+    <EmbeddedResource Include="AdvancedDialog.resx">
+      <DependentUpon>AdvancedDialog.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="RibbonUI.xml" />
     <EmbeddedResource Include="ExceptionDialog.resx">
       <DependentUpon>ExceptionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Messages.ja.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -109,7 +139,16 @@
   <ItemGroup>
     <Content Include="RibbonUI.ja.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="setup.nsi">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"%25ProgramFiles(x86)%25\NSIS\Bin\makensis.exe" setup.nsi
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

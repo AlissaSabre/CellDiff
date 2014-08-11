@@ -4,9 +4,9 @@
     <tabs>
       <tab idMso="TabReview">
         <group id="group1" label="比較">
-          <button id="compareCellsButton" label="セル内容を比較" imageMso="ReviewCompareTwoVersions" size="large" onAction="OnAction" />
+          <button id="quickCompare" label="セル内容を比較" imageMso="ReviewCompareTwoVersions" size="large" onAction="OnAction" />
           <dialogBoxLauncher>
-            <button id="dialogLauncher" screentip="高度な比較オプション" onAction="OnAction" />
+            <button id="advancedCompare" screentip="高度なオプションにより比較" onAction="OnAction" />
           </dialogBoxLauncher>
         </group>
       </tab>

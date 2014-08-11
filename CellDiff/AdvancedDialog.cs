@@ -9,7 +9,10 @@ using System.Windows.Forms;
 
 namespace CellDiff
 {
-    public partial class Advanced : Form
+    /// <summary>
+    /// Dialog box to receive advanced options.
+    /// </summary>
+    public partial class AdvancedDialog : Form
     {
         public struct OptionValues
         {
@@ -33,7 +36,7 @@ namespace CellDiff
 
         public event ValidateOptionsEvent ValidateOptions;
 
-        public Advanced()
+        public AdvancedDialog()
         {
             InitializeComponent();
         }
@@ -52,11 +55,11 @@ namespace CellDiff
             sourceUnderline.Checked = Options.SourceDecoration.Underline;
             sourceStrikeout.Checked = Options.SourceDecoration.Strikeout;
             sourceBold.Checked = Options.SourceDecoration.Bold;
-            sourceColor.Text = Options.SourceDecoration.Color.ToString("X6");
+            sourceColorBox.BackColor = Options.SourceDecoration.Color;
             targetUnderline.Checked = Options.TargetDecoration.Underline;
             targetStrikeout.Checked = Options.TargetDecoration.Strikeout;
             targetBold.Checked = Options.TargetDecoration.Bold;
-            targetColor.Text = Options.TargetDecoration.Color.ToString("X6");
+            targetColorBox.BackColor = Options.TargetDecoration.Color;
         }
 
         private void ok_Click(object sender, EventArgs e)
@@ -69,9 +72,11 @@ namespace CellDiff
             args.Options.SourceDecoration.Underline = sourceUnderline.Checked;
             args.Options.SourceDecoration.Strikeout = sourceStrikeout.Checked;
             args.Options.SourceDecoration.Bold = sourceBold.Checked;
+            args.Options.SourceDecoration.Color = sourceColorBox.BackColor;
             args.Options.TargetDecoration.Underline = targetUnderline.Checked;
             args.Options.TargetDecoration.Strikeout = targetStrikeout.Checked;
             args.Options.TargetDecoration.Bold = targetBold.Checked;
+            args.Options.TargetDecoration.Color = targetColorBox.BackColor;
 
             var handler = ValidateOptions;
             if (handler != null)
@@ -83,6 +88,16 @@ namespace CellDiff
             {
                 Options = args.Options;
                 Close();
+            }
+        }
+
+        private void colorPictureBox_Click(object sender, EventArgs e)
+        {
+            var pictureBox = sender as PictureBox;
+            colorDialog.Color = pictureBox.BackColor;
+            if (DialogResult.OK == colorDialog.ShowDialog(this))
+            {
+                pictureBox.BackColor = colorDialog.Color;
             }
         }
     }

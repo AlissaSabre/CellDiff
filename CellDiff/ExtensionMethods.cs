@@ -5,6 +5,9 @@ using System.Text;
 
 namespace CellDiff
 {
+    /// <summary>
+    /// Provides a set of extension methods for various types.
+    /// </summary>
     public static class ExtensionMethods
     {
         /// <summary>
@@ -47,6 +50,5 @@ namespace CellDiff
                 yield return Tuple.Create(last, run);
             }
         }
-
     }
 }

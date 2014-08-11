@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Windows.Forms;
 
@@ -24,12 +25,67 @@ namespace CellDiff
         }
 
         /// <summary>
+        /// Compare Cells in Selection using the default set of options.
+        /// </summary>
+        public void QuickCompare()
+        {
+            var selection = Application.Selection as Range;
+            if (selection == null)
+            {
+                Error(Messages.ERROR_Selection_was_not_a_Range);
+                return;
+            }
+
+            var ranges = FindCompareRanges(selection as Range, false);
+            if (ranges != null)
+            {
+                CompareRanges(ranges[0], ranges[1], null, QUICK_OPTIONS);
+            }
+        }
+
+        /// <summary>
+        /// Compare cells through an AdvancedOptions dialog.
+        /// </summary>
+        public void AdvancedCompare()
+        {
+            using (var dlg = new AdvancedDialog())
+            {
+                dlg.Options = AdvancedOptions;
+                if (DialogResult.OK != dlg.ShowDialog()) return;
+                AdvancedOptions = dlg.Options;
+            }
+
+            var src = Application.Range(AdvancedOptions.Sources).Cells;
+            var tgt = Application.Range(AdvancedOptions.Targets).Cells;
+            var dst = AdvancedOptions.SeparateDestinateions ? Application.Range(AdvancedOptions.Destinations).Cells : null;
+            CompareRanges(src, tgt, dst,
+                new Options()
+                {
+                    Src = AdvancedOptions.SourceDecoration,
+                    Tgt = AdvancedOptions.TargetDecoration
+                });
+        }
+
+        /// <summary>
         /// A sort of a tiebreaker for a quick compare 
         /// </summary>
-        private static bool PreferVertical = false;
+        private bool PreferVertical = false;
 
-        void QuickCompare(Range selection, Options options)
+        Range[] FindCompareRanges(Range selection, bool generous)
         {
+            // Range.MergeCells can be one of three values; true, false, 
+            // and a Variant value Null which is mapped to DBNull.Value in .NET.
+            if (!false.Equals(selection.MergeCells))
+            {
+                if (!generous) Error(Messages.ERROR_MergedCells);
+                return null;
+            }
+            if (selection.Cells.Count < 2)
+            {
+                if (!generous) Error(Messages.ERROR_One_cell);
+                return null;
+            }
+
             switch (selection.Areas.Count)
             {
                 case 1:
@@ -38,20 +94,19 @@ namespace CellDiff
                     {
                         // Go vertical
                         PreferVertical = true;
-                        CompareRanges(area.Columns[1], area.Columns[2], null, options);
+                        return new[] { area.Columns[1].Cells, area.Columns[2].Cells };
                     }
                     else if (area.Rows.Count == 2)
                     {
                         // GO horizontal
                         PreferVertical = false;
-                        CompareRanges(area.Rows[1], area.Rows[2], null, options);
+                        return new [] { area.Rows[1].Cells, area.Rows[2].Cells };
                     }
                     else
                     {
-                        Error("WRONG SELECTION");
-                        return;
+                        if (!generous) Error(Messages.ERROR_Invalid_selected_range);
+                        return null;
                     }
-                    break;
 
                 case 2:
                     var area1 = selection.Areas[1];
@@ -63,18 +118,17 @@ namespace CellDiff
                         a1r == 1 && a2c == 1 && a1c == a2r ||
                         a1r == 1 && a2r == 1 && a1c == a2c)
                     {
-                        CompareRanges(area1, area2, null, options);
+                        return new[] { area1.Cells, area2.Cells };
                     }
                     else
                     {
-                        Error("WRONG SELECTION");
-                        return;
+                        if (!generous) Error(Messages.ERROR_Areas_have_different_sizes);
+                        return null;
                     }
-                    break;
 
                 default:
-                    Error("WRONG SELECTION");
-                    return;
+                    if (!generous) Error(Messages.ERROR_Invalid_selected_areas);
+                    return null;
             }
         }
 
@@ -82,7 +136,14 @@ namespace CellDiff
 
         private const int UPDATE_INDEX_DIVIDER = 20;
 
-        private void CompareRanges(Range sources, Range targets, Range destinations, Options options)
+        /// <summary>
+        /// Compare cells.
+        /// </summary>
+        /// <param name="sources">The source cells.</param>
+        /// <param name="targets">The target cells.</param>
+        /// <param name="destinations">The cells to store the results; or null if the results are to overwrite source and target cells.</param>
+        /// <param name="options">The options for results.</param>
+        public void CompareRanges(Range sources, Range targets, Range destinations, Options options)
         {
             var src = sources.Cells;
             var tgt = targets.Cells;
@@ -193,9 +254,9 @@ namespace CellDiff
             }
         }
 
-        void Error(string s)
+        internal void Error(string message, params object[] args)
         {
-            MessageBox.Show(s);
+            MessageBox.Show(string.Format(message, args), Messages.ErrorCaption);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace CellDiff
 {
-    partial class Advanced
+    partial class AdvancedDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Advanced));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvancedDialog));
             this.label1 = new System.Windows.Forms.Label();
             this.sources = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,23 +39,26 @@
             this.separateDestination = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.sourceColorBox = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.sourceBold = new System.Windows.Forms.CheckBox();
             this.sourceStrikeout = new System.Windows.Forms.CheckBox();
             this.sourceUnderline = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.targetColorBox = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.targetBold = new System.Windows.Forms.CheckBox();
             this.targetStrikeout = new System.Windows.Forms.CheckBox();
             this.targetUnderline = new System.Windows.Forms.CheckBox();
             this.ok = new System.Windows.Forms.Button();
             this.cancel = new System.Windows.Forms.Button();
-            this.sourceColor = new System.Windows.Forms.TextBox();
-            this.targetColor = new System.Windows.Forms.TextBox();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sourceColorBox)).BeginInit();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.targetColorBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -65,6 +68,7 @@
             // 
             // sources
             // 
+            this.sources.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.sources, "sources");
             this.sources.Name = "sources";
             // 
@@ -75,6 +79,7 @@
             // 
             // targets
             // 
+            this.targets.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.targets, "targets");
             this.targets.Name = "targets";
             // 
@@ -99,6 +104,7 @@
             // 
             // destinations
             // 
+            this.destinations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.destinations, "destinations");
             this.destinations.Name = "destinations";
             // 
@@ -119,7 +125,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.sourceColor);
+            this.groupBox3.Controls.Add(this.sourceColorBox);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.sourceBold);
             this.groupBox3.Controls.Add(this.sourceStrikeout);
@@ -127,6 +133,14 @@
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
+            // 
+            // sourceColorBox
+            // 
+            this.sourceColorBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.sourceColorBox, "sourceColorBox");
+            this.sourceColorBox.Name = "sourceColorBox";
+            this.sourceColorBox.TabStop = false;
+            this.sourceColorBox.Click += new System.EventHandler(this.colorPictureBox_Click);
             // 
             // label3
             // 
@@ -153,7 +167,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.targetColor);
+            this.groupBox4.Controls.Add(this.targetColorBox);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.targetBold);
             this.groupBox4.Controls.Add(this.targetStrikeout);
@@ -161,6 +175,14 @@
             resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
+            // 
+            // targetColorBox
+            // 
+            this.targetColorBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.targetColorBox, "targetColorBox");
+            this.targetColorBox.Name = "targetColorBox";
+            this.targetColorBox.TabStop = false;
+            this.targetColorBox.Click += new System.EventHandler(this.colorPictureBox_Click);
             // 
             // label4
             // 
@@ -200,15 +222,9 @@
             this.cancel.Name = "cancel";
             this.cancel.UseVisualStyleBackColor = true;
             // 
-            // sourceColor
+            // colorDialog
             // 
-            resources.ApplyResources(this.sourceColor, "sourceColor");
-            this.sourceColor.Name = "sourceColor";
-            // 
-            // targetColor
-            // 
-            resources.ApplyResources(this.targetColor, "targetColor");
-            this.targetColor.Name = "targetColor";
+            this.colorDialog.AnyColor = true;
             // 
             // Advanced
             // 
@@ -234,8 +250,10 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sourceColorBox)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.targetColorBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -263,7 +281,8 @@
         private System.Windows.Forms.CheckBox targetUnderline;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.Button cancel;
-        private System.Windows.Forms.TextBox sourceColor;
-        private System.Windows.Forms.TextBox targetColor;
+        private System.Windows.Forms.PictureBox sourceColorBox;
+        private System.Windows.Forms.PictureBox targetColorBox;
+        private System.Windows.Forms.ColorDialog colorDialog;
     }
 }

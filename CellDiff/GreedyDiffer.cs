@@ -9,24 +9,24 @@ namespace Alissa.Differ2
 {
     /// <summary>
     /// A variation of the greedy algorithm by Eugene W. Myers (1986). O((M+N)*D).
-    /// It means this algorithm works fast if given two lists are _similar_.
+    /// It means this algorithm works fast if given two lists are <i>similar</i>.
     /// </summary>
     [ComVisible(false)]
     public class GreedyDiffer<T> : DifferBase<T>
     {
-        public GreedyDiffer() : base() { }
-
-        public GreedyDiffer(IComparer<T> comparer) : base(comparer) { }
-
-        public GreedyDiffer(Comparison<T> comparison) : base(comparison) { }
-
         private struct Head
         {
             public int Src, Dst;
             public string Tra;
         }
 
-        protected override string DoCompare(IList<T> src, IList<T> dst)
+        /// <summary>
+        /// Implements <see cref="IDiffer.Compare"/>.
+        /// </summary>
+        /// <param name="src">The source sequence.</param>
+        /// <param name="dst">The destination sequence.</param>
+        /// <returns>A canonical difference string.</returns>
+        public override string Compare(IList<T> src, IList<T> dst)
         {
             var sn = src.Count;
             var dn = dst.Count;
@@ -84,7 +84,7 @@ namespace Alissa.Differ2
                 // See if we have reached the goal.
                 if (heads[goal].Src >= sn && heads[goal].Dst >= dn)
                 {
-                    return heads[goal].Tra + new string('=', src.Count - sn);
+                    return Reorder(heads[goal].Tra) + new string('=', src.Count - sn);
                 }
             }
 
