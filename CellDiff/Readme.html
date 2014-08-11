@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CellDiff: An Excel add-in to compare (diff) cell contents</title>
+<style type="text/css">
+div.fig img { display: block; margin: auto; }
+div.fig p { text-align: center; }
+</style>
+</head>
+<body>
+<h1>CellDiff: An Excel add-in to compare (diff) cell contents</h1>
+<h2>Contents</h2>
+<div class="contents">
+<div><a href="#s1">1. Introduction</a></div>
+<div><a href="#s1.1">1.1 Background</a></div>
+<div><a href="#s2">2. How to use</a></div>
+<div><a href="#s2.1">2.1 Using Compare Cell Contents</a></div>
+<div><a href="#s2.2">2.2 Using Compare with Advanced Options</a></div>
+<div><a href="#s2.3">2.3 Using CellDiff in macros (Visual Basic)</a></div>
+<div><a href="#s3">3. How to install and uninstall</a></div>
+<div><a href="#s3.1">3.1 System requirements</a></div>
+<div><a href="#s3.2">3.2 Install process</a></div>
+<div><a href="#s3.3">3.3 Uninstall process</a></div>
+<div><a href="#s3.4">3.4 Notes on resorce usage</a></div>
+<div><a href="#s4">4. Licenses and other legal notices</a></div>
+</div>
+<a name="s1"></a>
+<h2>1. Introduction</h2>
+<p>
+CellDiff is a Microsoft Office Excel add-in to compare cell contents.  See the screenshot below.
+</p>
+<div class="fig">
+<img src="Images/screenshot.png" type="image/png" alt="Screenshot of compared cells using CellDiff" />
+<p>Fig. 1: Screenshot of compared cells using CellDiff</p>
+</div>
+<a name="s1.1"></a>
+<h3>1.1 Background</h3>
+<p>
+I wrote this program to facilitate document review process.
+</p>
+<p>
+When I review some documents, I am often asked to write the review comments and suggested changes on an Excel sheet.
+Such a form usually contains columns such as: line number, original sentence, suggested change, and comments.
+The original author or a document editor reads the comments and decide whether to apply the suggested changes.
+I believe it is a common practice.
+</p>
+<p>
+If a change to a particular sentence is small, e.g., just a correction of a typo or two,
+the original sentence and suggested change are almost same, 
+and I often need to explain which letter I changed in the comment column.
+I considered it is a waste of time, and created this small add-in to avoid it.
+</p>
+<a name="s2"></a>
+<h2>2. How to use</h2>
+<p>
+On the Excel's ribbon, under the Review tab, you see a large command icon labeled Compare Cell Contents. 
+(See the screenshot below.)
+Select cells that contain texts you want to compare, then click on the Compare Cell Contents.
+Contents of the sellected cells are compared, and the differences are emphasized.
+</p>
+<div class="fig">
+<img src="Images/ribbon.png" type="image/png" alt="Ribbon command icon of CellDiff" />
+<p>Fig. 2: Ribbon command icon of CellDiff
+</div>
+<a name="s2.1"></a>
+<h3>2.1 Using Compare Cell Contents</h3>
+<p>
+There are five ways to select cells for Compare Cell Contents:
+</p>
+<ul>
+<li>
+Select two adjacent cells with a single mouse dragging.  This is the most basic way to use Compare Cell Contents.
+Two cells may be adjacent horizontally (i.e., they are on a same row) or vertically (i.e., they are on a same column.)
+</li>
+<li>
+Select several rows in two adjacent columns with a single mouse dragging, resulting a rectangular selection of width two.
+Two cells on a same row will be compared in this case.
+</li>
+<li>
+Select several columns in two adjacent rows with a single mouse dragging.  This is a swapped row-column version of the above.
+Two cells on a same column will be compared in this case.
+</li>
+<li>
+Select two non-adjacent cells, by clicking on the first cell and then control-clicking on the second cell.
+Then, click on Compare Cell Contents.
+</li>
+<li>
+Select two separate (non-adjacent) areas of cells.  This is usuful if you want to compare non-adjacent cells.
+Select the first group of cells, as usual, with a single mouse dragging, then control-drag over the second group of cells.
+This way, you can get two separate areas of cells selected.
+Click on Compare Cell Contents, then.
+Each cell in the first area are compared against a cell in the second area.
+Note that the two areas should contain the same number of cells.
+</li>
+</ul>
+<a name="s2.2"></a>
+<h3>2.2 Using Compare with Advanced Options</h3>
+<p>
+To the lower right of Compare Cell Contents command icon is a dialog box launcher symbol.
+</p>
+<div class="fig">
+<img src="Images/dialoglauncher.png" type="image/png" alt="Dialog box launcher symbol" />
+<p>Fig. 4: Dialog box launcher synbox (pointed to by a red arrow)</p>
+</div>
+<p>
+As other dialog box lancher symbols appearing elsewhere on the ribbon, 
+when you click on it, 
+a dialog box opens so that you can specify some detailed and/or advanced options when comparing cells.
+With this dialog box, you can instruct CellDiff to behave differently than what you can get with Compare Cell Contents.
+</p>
+<div class="fig">
+<img src="Images/advancedoptions.png" type="image/png" alt="Advanced Compare Options dialog box" />
+<p>Fig. 3: Advanced COmpare Options dialog box</p>
+</div>
+<p>
+On 
+</p>
+</body>
+</html>
