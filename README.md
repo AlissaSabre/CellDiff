@@ -1,7 +1,7 @@
 CellDiff
 ========
 
-An Excel plug-in to compare (diff) cell contents. Written in C# with NetOffice.
+An Excel add-in to compare (diff) cell contents. Written in C# with NetOffice.
 
 ## Summary
 
