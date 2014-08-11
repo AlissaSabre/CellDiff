@@ -8,8 +8,6 @@ An Excel plug-in to compare (diff) cell contents. Written in C# with NetOffice.
 This program will eventually be a Microsoft Office Excel add-in.
 It will provide some functionality to compare cell contents (like diff command) on a worksheet interactively.
 
-You can read an [end-user document] (CellDiff/Readme.html) to know what it does.
-
 It is just started recently and under a heavy yet slow development.
 Source files even committed to the master branch may not be compile for the moment.
 
