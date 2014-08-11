@@ -40,7 +40,7 @@
     <RegisterForComInterop>false</RegisterForComInterop>
     <DocumentationFile>
     </DocumentationFile>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Excel, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -98,6 +98,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\advancedoptions.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dialoglauncher.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ribbon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Readme.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\screenshot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="AdvancedDialog.ja.resx">
       <DependentUpon>AdvancedDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,7 +139,16 @@
   <ItemGroup>
     <Content Include="RibbonUI.ja.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="setup.nsi">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"%25ProgramFiles(x86)%25\NSIS\Bin\makensis.exe" setup.nsi
+</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
