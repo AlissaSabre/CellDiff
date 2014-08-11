@@ -27,7 +27,6 @@ namespace CellDiff
     /// Main class of CellDiff Addin.
     /// </summary>
     [COMAddin("CellDiff", "Excel add-in to compare cell contents", 3)]
-    [RegistryLocation(RegistrySaveLocation.LocalMachine)]
     [GuidAttribute("3DF43D38-7D7E-4B28-A5D9-CF795FF10A32"), ProgId("CellDiff.Addin")]
     public partial class Addin : COMAddin
     {

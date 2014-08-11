@@ -8,7 +8,7 @@ SetCompressor /SOLID /FINAL lzma
 ; Product Identity and other general config
 !define PRODUCT_NAME "CellDiff"
 !define PRODUCT_LONG_NAME "CellDiff: An Excel plug-in to compare cell contents"
-!define PRODUCT_VERSION "0.8.2.0"
+!define PRODUCT_VERSION "1.0.0.0"
 !define PRODUCT_PUBLISHER "Alissa Sabre"
 !define PRODUCT_WEB_SITE "https://github.com/AlissaSabre/CellDiff"
 
