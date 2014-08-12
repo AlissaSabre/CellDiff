@@ -22,8 +22,9 @@ Other branches may hold set of source files that cause compile errors.
 * Microsoft Office Excel 2007, 2010, or 2013.
 * English and Japanese UI.
 
-## Development Environment
+## Development Tools
 
 * Visual Studio Express 2012/2013 (C#)
 * [NetOffice] (http://netoffice.codeplex.com/) 1.6.0
+* [NSIS] (http://nsis.sourceforge.net/Main_Page) 3.0
 
