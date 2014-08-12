@@ -1,14 +1,16 @@
 ; -*- coding: utf-8; -*-
 
 ; Setup script for CellDiff: An Excel plug-in to compare cell contents
+; This script requires NSIS version 3.0 or later.
 
+RequestExecutionLevel admin
 Unicode true
 SetCompressor /SOLID /FINAL lzma
 
 ; Product Identity and other general config
 !define PRODUCT_NAME "CellDiff"
 !define PRODUCT_LONG_NAME "CellDiff: An Excel plug-in to compare cell contents"
-!define PRODUCT_VERSION "1.0.0.0"
+!define PRODUCT_VERSION "0.6.1.0"
 !define PRODUCT_PUBLISHER "Alissa Sabre"
 !define PRODUCT_WEB_SITE "https://github.com/AlissaSabre/CellDiff"
 
@@ -70,7 +72,7 @@ Function on_page_welcome_leave
   ReadRegStr  $0 HKLM "Software\Microsoft\.NetFramework" "InstallRoot"
   IfErrors ERR
   StrCmp $0 "" ERR
-  IfFileExists "$0\v4.0.30319\regasm.exe" OK
+  IfFileExists "$0\..\Framework\v4.0.30319\regasm.exe" OK
 Err:
   MessageBox MB_OK "$(DotNetNotFound)"
   Quit
@@ -94,11 +96,15 @@ Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
   SetOverwrite on
 
-  File "${BINARY_DIR}\*.dll"
-; File /oname="$OUTDIR\ja\CellDiff.resources.dll" "${BINARY_DIR}\ja\CellDiff.resources.dll"
+  File    "${BINARY_DIR}\CellDiff.dll"
+  File    "${BINARY_DIR}\NetOffice.dll"
+  File    "${BINARY_DIR}\ExcelApi.dll"
+  File    "${BINARY_DIR}\OfficeApi.dll"
+  File    "${BINARY_DIR}\VBIDEApi.dll"
   File /r "${BINARY_DIR}\ja"
-  File "${PRODUCT_README_EN}"
-  File /r "${BINARY_DIR}\Images"  
+
+  File    "${BINARY_DIR}\${PRODUCT_README_EN}"
+  File /r "${BINARY_DIR}\Images"
 
   ; Run regasm in .NET 4.0
   DetailPrint "$(RegisterMessage)"
@@ -106,12 +112,12 @@ Section "MainSection" SEC01
   ReadRegStr $0 HKLM "Software\Microsoft\.NetFramework" "InstallRoot"
   IfErrors ERR
   StrCmp $0 "" ERR
-  IfFileExists "$0\v4.0.30319\regasm.exe" OK
+  IfFileExists "$0\..\Framework\v4.0.30319\regasm.exe" OK
 Err:
   MessageBox MB_OK "$(DotNetNotFound)"
   Quit
 OK:  
-  nsExec::ExecToLog '"$0\v4.0.30319\regasm.exe" "$OUTDIR\CellDiff.dll" /nologo /silent'
+  nsExec::ExecToLog '"$0\..\Framework\v4.0.30319\regasm.exe" "$OUTDIR\CellDiff.dll" /codebase /nologo /silent'
   pop $0
   StrCmp $0 "0" OK2
   MessageBox MB_OK "$(RegAsmFailed): $0"
@@ -162,20 +168,29 @@ Section Uninstall
   ReadRegStr $0 HKLM "Software\Microsoft\.NetFramework" "InstallRoot"
   IfErrors SKIP
   StrCmp $0 "" SKIP
-  IfFileExists "$0\v4.0.30319\regasm.exe" OK SKIP
+  IfFileExists "$0\..\Framework\v4.0.30319\regasm.exe" OK SKIP
 OK:  
-  nsExec::ExecToLog '"$0\v4.0.30319\regasm.exe" "$OUTDIR\CellDiff.dll" /nologo /silent /unregister'
+  nsExec::ExecToLog '"$0\..\Framework\v4.0.30319\regasm.exe" "$INSTDIR\CellDiff.dll" /codebase /nologo /silent /unregister'
   pop $0
 SKIP:
   pop $0
 
   ; Remove the installed files and directory.
-  Delete "$INSTDIR\ja\*.*"
-  Delete "$INSTDIR\Images\*.*"
-  Delete "$INSTDIR\*.*"
-  RMDir "$INSTDIR\ja"
-  RMDir "$INSTDIR\Images"
-  RMDir "$INSTDIR"
+  Delete "$INSTDIR\Images\*.png"
+  Delete "$INSTDIR\Images\Readme.txt"
+  RMDir  "$INSTDIR\Images"
+  Delete "$INSTDIR\${PRODUCT_README_EN}"
+
+  Delete "$INSTDIR\ja\CellDiff.resources.dll"
+  RMDir  "$INSTDIR\ja"
+  Delete "$INSTDIR\CellDiff.dll"
+  Delete "$INSTDIR\NetOffice.dll"
+  Delete "$INSTDIR\ExcelApi.dll"
+  Delete "$INSTDIR\OfficeApi.dll"
+  Delete "$INSTDIR\VBIDEApi.dll"
+
+  Delete "$INSTDIR\uninst.exe"
+  RMDir  "$INSTDIR"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
 

@@ -5,12 +5,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>CellDiff: An Excel add-in to compare (diff) cell contents</title>
 <style type="text/css">
+h1 { text-align: center; }
+div.sub { text-align: center; }
+div.warning { margin: 1em 10%; padding: 0.5em 1em; border: thin solid red; text-align: center; }
 div.fig img { display: block; margin: auto; }
 div.fig p { text-align: center; }
 </style>
 </head>
 <body>
 <h1>CellDiff: An Excel add-in to compare (diff) cell contents</h1>
+<div class="sub">by Alissa Sabre &lt;alissa_sabre@yahoo.co.jp&gt;</div>
+<div class="sub">Readme for <i>Preview 1</i> (0.6.1.0) version.</div>
+<div class="warning">
+<h2>WARNING</h2>
+<p>
+This is a preview of a work in progress.
+It will not work properly.
+Please do not use it in a production environment.
+</p>
+</div>
 <h2>Contents</h2>
 <div class="contents">
 <div><a href="#s1">1. Introduction</a></div>
@@ -26,17 +39,15 @@ div.fig p { text-align: center; }
 <div><a href="#s3.4">3.4 Notes on resorce usage</a></div>
 <div><a href="#s4">4. Licenses and other legal notices</a></div>
 </div>
-<a name="s1"></a>
-<h2>1. Introduction</h2>
+<h2><a name="s1"></a>1. Introduction</h2>
 <p>
 CellDiff is a Microsoft Office Excel add-in to compare cell contents.  See the screenshot below.
 </p>
 <div class="fig">
-<img src="Images/screenshot.png" type="image/png" alt="Screenshot of compared cells using CellDiff" />
+<img src="Images/screenshot.png" alt="Screenshot of compared cells using CellDiff" />
 <p>Fig. 1: Screenshot of compared cells using CellDiff</p>
 </div>
-<a name="s1.1"></a>
-<h3>1.1 Background</h3>
+<h3><a name="s1.1"></a>1.1 Background</h3>
 <p>
 I wrote this program to facilitate document review process.
 </p>
@@ -52,8 +63,7 @@ the original sentence and suggested change are almost same,
 and I often need to explain which letter I changed in the comment column.
 I considered it is a waste of time, and created this small add-in to avoid it.
 </p>
-<a name="s2"></a>
-<h2>2. How to use</h2>
+<h2><a name="s2"></a>2. How to use</h2>
 <p>
 On the Excel's ribbon, under the Review tab, you see a large command icon labeled Compare Cell Contents. 
 (See the screenshot below.)
@@ -61,11 +71,10 @@ Select cells that contain texts you want to compare, then click on the Compare C
 Contents of the sellected cells are compared, and the differences are emphasized.
 </p>
 <div class="fig">
-<img src="Images/ribbon.png" type="image/png" alt="Ribbon command icon of CellDiff" />
-<p>Fig. 2: Ribbon command icon of CellDiff
+<img src="Images/ribbon.png" alt="Ribbon command icon of CellDiff" />
+<p>Fig. 2: Ribbon command icon of CellDiff</p>
 </div>
-<a name="s2.1"></a>
-<h3>2.1 Using Compare Cell Contents</h3>
+<h3><a name="s2.1"></a>2.1 Using Compare Cell Contents</h3>
 <p>
 There are five ways to select cells for Compare Cell Contents:
 </p>
@@ -95,14 +104,13 @@ Each cell in the first area are compared against a cell in the second area.
 Note that the two areas should contain the same number of cells.
 </li>
 </ul>
-<a name="s2.2"></a>
-<h3>2.2 Using Compare with Advanced Options</h3>
+<h3><a name="s2.2"></a>2.2 Using Compare with Advanced Options</h3>
 <p>
 To the lower right of Compare Cell Contents command icon is a dialog box launcher symbol.
 </p>
 <div class="fig">
-<img src="Images/dialoglauncher.png" type="image/png" alt="Dialog box launcher symbol" />
-<p>Fig. 4: Dialog box launcher synbox (pointed to by a red arrow)</p>
+<img src="Images/dialoglauncher.png" alt="Dialog box launcher symbol" />
+<p>Fig. 3: Dialog box launcher synbox (pointed to by a red arrow)</p>
 </div>
 <p>
 As other dialog box lancher symbols appearing elsewhere on the ribbon, 
@@ -111,8 +119,8 @@ a dialog box opens so that you can specify some detailed and/or advanced options
 With this dialog box, you can instruct CellDiff to behave differently than what you can get with Compare Cell Contents.
 </p>
 <div class="fig">
-<img src="Images/advancedoptions.png" type="image/png" alt="Advanced Compare Options dialog box" />
-<p>Fig. 3: Advanced COmpare Options dialog box</p>
+<img src="Images/advancedoptions.png" alt="Advanced Compare Options dialog box" />
+<p>Fig. 4: Advanced COmpare Options dialog box</p>
 </div>
 <p>
 On 
