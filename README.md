@@ -13,6 +13,7 @@ Other branches may hold set of source files that cause compile errors.
 
 ## Status
 
+* (2014-8-13) Preview 1 is released.  Its installable binary is available on [SourceForge] (https://sourceforge.net/projects/celldiffaddin/).
 * (2014-7-28) The core functionality started to work.
 
 ## Target environment
