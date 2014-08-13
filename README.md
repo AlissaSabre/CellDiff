@@ -13,10 +13,11 @@ Other branches may hold set of source files that cause compile errors.
 
 ## Status
 
-* (2014-8-13) Preview 1 is released.  Its installable binary is available on [SourceForge] (https://sourceforge.net/projects/celldiffaddin/).
+* (2014-8-13) Preview 1 is released.
+  Its installable binary is available on [SourceForge](https://sourceforge.net/projects/celldiffaddin/).
 * (2014-7-28) The core functionality started to work.
 
-## Target environment
+## Target Environment
 
 * Modern Windows (Windows 7, 8 or later.  Vista may be included.) 
 * .Net Framework 4.0 (Client Profile)
@@ -26,6 +27,6 @@ Other branches may hold set of source files that cause compile errors.
 ## Development Tools
 
 * Visual Studio Express 2012/2013 (C#)
-* [NetOffice] (http://netoffice.codeplex.com/) 1.6.0
-* [NSIS] (http://nsis.sourceforge.net/Main_Page) 3.0
+* [NetOffice](http://netoffice.codeplex.com/) 1.6.0
+* [NSIS](http://nsis.sourceforge.net/Main_Page) 3.0
 
