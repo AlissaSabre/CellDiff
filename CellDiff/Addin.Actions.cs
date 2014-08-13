@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -18,6 +19,7 @@ namespace CellDiff
 {
     public partial class Addin : COMAddin
     {
+        [ComVisible(false)]
         public class Options
         {
             public Decoration Src;

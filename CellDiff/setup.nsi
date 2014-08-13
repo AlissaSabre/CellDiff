@@ -10,9 +10,14 @@ SetCompressor /SOLID /FINAL lzma
 ; Product Identity and other general config
 !define PRODUCT_NAME "CellDiff"
 !define PRODUCT_LONG_NAME "CellDiff: An Excel plug-in to compare cell contents"
-!define PRODUCT_VERSION "0.6.1.0"
 !define PRODUCT_PUBLISHER "Alissa Sabre"
 !define PRODUCT_WEB_SITE "https://github.com/AlissaSabre/CellDiff"
+
+!define BINARY_DIR "."
+
+; XXX: automates the version number updates.
+!getdllversion "${BINARY_DIR}\CellDiff.dll" DLL_VERSION_
+!define PRODUCT_VERSION "${DLL_VERSION_1}.${DLL_VERSION_2}.${DLL_VERSION_3}.${DLL_VERSION_4}"
 
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
@@ -80,8 +85,6 @@ OK:
   pop $0
 FunctionEnd
 
-!define BINARY_DIR "."
-
 Name "${PRODUCT_NAME}"
 OutFile "${BINARY_DIR}\${PRODUCT_SETUP_NAME}"
 InstallDir "$PROGRAMFILES\Alissa\CellDiff"
@@ -124,6 +127,11 @@ OK:
   Quit
 OK2:  
   pop $0
+
+  ; XXX: Work around a NetOffice (?) issue: http://netoffice.codeplex.com/workitem/21224
+  !if ${PRODUCT_VERSION} != "1.0.0.0"
+  DeleteRegKey HKCR "CLSID\{3DF43D38-7D7E-4B28-A5D9-CF795FF10A32}\InprocServer32\1.0.0.0"
+  !endif  
 
 SectionEnd
 

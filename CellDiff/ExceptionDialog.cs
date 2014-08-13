@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
 namespace Alissa.GUI
 {
+    [ComVisible(false)]
     public partial class ExceptionDialog : Form
     {
         public ExceptionDialog()

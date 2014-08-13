@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -12,8 +13,10 @@ namespace CellDiff
     /// <summary>
     /// Dialog box to receive advanced options.
     /// </summary>
+    [ComVisible(false)]
     public partial class AdvancedDialog : Form
     {
+        [ComVisible(false)]
         public struct OptionValues
         {
             public string Sources;
@@ -26,6 +29,7 @@ namespace CellDiff
 
         public OptionValues Options;
 
+        [ComVisible(false)]
         public class ValidateOptionsEventArgs : EventArgs
         {
             public OptionValues Options;
